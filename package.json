@@ -5,12 +5,14 @@
   "author": "stephenliu <stephenlyao@yeah.net>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
+    "dev-client": "webpack-dev-server --inline --progress --config client/build/webpack.dev.conf.js",
+    "dev-admin": "webpack-dev-server --inline --progress --config admin/build/webpack.dev.conf.js",
+    "build-client": "node client/build/build.js",
+    "build-admin": "node admin/build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit/specs",
-    "build": "node build/build.js"
+    "dev-server": ""
   },
   "dependencies": {
     "vue": "^2.5.2",
