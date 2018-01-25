@@ -9,10 +9,12 @@
     "dev-admin": "webpack-dev-server --inline --progress --config admin/build/webpack.dev.conf.js",
     "build-client": "node client/build/build.js",
     "build-admin": "node admin/build/build.js",
+    "dev-server": "cross-env NODE_ENV=development supervisor --harmony server/index.js",
+    "start-server": "cross-env NODE_ENV=production pm2 start server/index.js --node-args='--harmony'",
+    "restart-server": "cross-env NODE_ENV=production pm2 restart server/index.js --node-args='--harmony'",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
-    "lint": "eslint --ext .js,.vue src test/unit/specs",
-    "dev-server": ""
+    "lint": "eslint --ext .js,.vue src test/unit/specs"
   },
   "dependencies": {
     "vue": "^2.5.2",
@@ -43,6 +45,7 @@
     "chai": "^4.1.2",
     "sinon": "^4.0.0",
     "sinon-chai": "^2.8.0",
+    "supervisor": "^0.12.0",
     "inject-loader": "^3.0.0",
     "babel-plugin-istanbul": "^4.1.1",
     "phantomjs-prebuilt": "^2.1.14",
