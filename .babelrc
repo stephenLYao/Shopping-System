@@ -12,7 +12,13 @@
   "env": {
     "test": {
       "presets": ["env", "stage-2"],
-      "plugins": ["transform-vue-jsx", "istanbul"]
+      "plugins": [
+        "transform-vue-jsx",
+        "istanbul",
+        "transform-async-to-generator",
+        "transform-es2015-modules-commonjs",
+        "transform-export-extensions"
+      ]
     }
   }
 }
