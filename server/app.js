@@ -7,7 +7,7 @@ const history = require('connect-history-api-fallback');
 const mongoose = require('mongoose');
 const chalk = require('chalk');
 const config = require('./config/default');
-const router = require('./routes/index');
+const apiRoutes = require('./api/index');
 
 // connect mongodb
 mongoose.connect(config.mongodbUrl);
@@ -41,7 +41,8 @@ app.use(session({
     url: config.mongodbUrl
   })
 }));
-router(app);
+// Import API Routes
+app.use('/api', apiRoutes);
 app.use(history);
 app.listen(config.port, () => {
   console.log('Server is listening on port ' + config.port);

@@ -12,11 +12,14 @@
     "dev-server": "cross-env NODE_ENV=development supervisor --harmony server/app.js",
     "start-server": "cross-env NODE_ENV=production pm2 start server/app.js --node-args='--harmony'",
     "restart-server": "cross-env NODE_ENV=production pm2 restart server/app.js --node-args='--harmony'",
+    "start-db": "mongod --fork --dbpath ./server/db/data --logpath ./server/db/logs/mongodb.log",
+    "stop-db": "mongo --eval \"db.getSiblingDB('admin').shutdownServer()\"",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit/specs"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "connect-history-api-fallback": "^1.5.0",
     "connect-mongo": "^2.0.1",
@@ -24,9 +27,11 @@
     "express-session": "^1.15.6",
     "mongodb": "^3.0.2",
     "mongoose": "^5.0.2",
+    "validator": "^9.4.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.0.0"
+    "vuetify": "^1.0.0",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
