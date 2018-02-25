@@ -6,7 +6,7 @@
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
               <v-toolbar dark color="primary">
-                <v-toolbar-title>Login form</v-toolbar-title>
+                <v-toolbar-title>Login</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
                 <form @keyup.enter="submit">
@@ -39,9 +39,21 @@ export default {
     return {
       username: '',
       password: ''
-    }
+    };
   },
-}
+  methods: {
+    submit () {
+      this.$store.dispatch('logIn', {
+        username: this.username,
+        password: this.password
+      }).then(() => {
+        this.$router.replace({ name: 'home' });
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
+  }
+};
 </script>
 
 <style>

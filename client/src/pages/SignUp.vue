@@ -6,29 +6,18 @@
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
               <v-toolbar dark color="primary">
-                <v-toolbar-title>SignUp form</v-toolbar-title>
+                <v-toolbar-title>SignUp</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
                 <form @keyup.enter="submit">
                   <v-text-field
-                    
                     v-model="username"
                     label="Username"
                     name="username"
                     required
-                    hint="At least 5 characters."
-                    
+                    hint="At least 5 characters."                   
                     min="5"
                     :counter="this.username.length > 0 ? true : false"
-                  ></v-text-field>
-                  <v-text-field
-                    
-                    :rules="[isEmail]"
-                    v-model="email"
-                    label="Email"
-                    name="email"
-                    type="email"
-                    required
                   ></v-text-field>
                   <v-text-field
                     v-model="password1"
@@ -65,34 +54,34 @@
 </template>
 
 <script>
-import isEmail from 'validator/lib/isEmail';
 
 export default {
   name: 'login',
   data () {
     return {
       username: '',
-      email: '',
       password1: '',
       password2: '',
       pw1: true,
-      pw2: true,
-      usernameExistsData: false,
-      emailExistsData: false
+      pw2: true
     };
   },
   computed: {
     passwordsMatch () {
       return this.password1 === this.password2 ? '' : 'Passwords don\'t match';
-    },
-    usernameExists () {
-      return this.usernameExistsData ? 'Username already exists.' : '';
-    },
-    emailExists () {
-      return this.emailExistsData ? 'User with that email already exists.' : '';
-    },
-    isEmail () {
-      return !isEmail(this.email) && this.email.length ? 'Must be a valid email' : '';
+    }
+  },
+  methods: {
+    submit () {
+      this.$store.dispatch('signUp', {
+        username: this.username,
+        password1: this.password1,
+        password2: this.password2
+      }).then(() => {
+        this.$router.replace({ name: 'login' });
+      }).catch((error) => {
+        console.log(error);
+      });
     }
   }
 };
