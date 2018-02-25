@@ -1,13 +1,13 @@
-const express = require('express');
-const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const history = require('connect-history-api-fallback');
-const mongoose = require('mongoose');
-const chalk = require('chalk');
-const config = require('./config/default');
-const apiRoutes = require('./api/index');
+import express from 'express';
+import session from 'express-session';
+import connectMongo from 'connect-mongo';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import history from 'connect-history-api-fallback';
+import mongoose from 'mongoose';
+import chalk from 'chalk';
+import config from './config/default';
+import apiRoutes from './api/index';
 
 // connect mongodb
 mongoose.connect(config.mongodbUrl);
@@ -28,6 +28,7 @@ db.on('close', () => {
 });
 
 const app = express();
+const MongoStore = connectMongo(session);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false, limit: '50mb'}));
 app.use(cookieParser);

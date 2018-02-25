@@ -39,3 +39,13 @@
 2018-02-22T19:04:09.875+0800 I INDEX    [thread3] build index done.  scanned 0 total records. 0 secs
 2018-02-22T19:04:49.536+0800 I NETWORK  [conn2] end connection 127.0.0.1:61908 (1 connection now open)
 2018-02-22T19:04:49.536+0800 I NETWORK  [conn1] end connection 127.0.0.1:61903 (0 connections now open)
+2018-02-25T14:11:15.862+0800 I COMMAND  [PeriodicTaskRunner] task: UnusedLockCleaner took: 242ms
+2018-02-25T14:53:15.582+0800 I NETWORK  [listener] connection accepted from 127.0.0.1:59806 #3 (1 connection now open)
+2018-02-25T14:53:15.598+0800 I NETWORK  [conn3] received client metadata from 127.0.0.1:59806 conn: { driver: { name: "nodejs", version: "2.2.34" }, os: { type: "Darwin", name: "darwin", architecture: "x64", version: "17.0.0" }, platform: "Node.js v9.3.0, LE, mongodb-core: 2.1.18" }
+2018-02-25T14:53:16.395+0800 I NETWORK  [conn3] end connection 127.0.0.1:59806 (0 connections now open)
+2018-02-25T14:53:16.835+0800 I NETWORK  [listener] connection accepted from 127.0.0.1:59815 #4 (1 connection now open)
+2018-02-25T14:53:16.847+0800 I NETWORK  [conn4] received client metadata from 127.0.0.1:59815 conn: { driver: { name: "nodejs", version: "2.2.34" }, os: { type: "Darwin", name: "darwin", architecture: "x64", version: "17.0.0" }, platform: "Node.js v9.3.0, LE, mongodb-core: 2.1.18" }
+2018-02-25T14:53:17.859+0800 I NETWORK  [listener] connection accepted from 127.0.0.1:59818 #5 (2 connections now open)
+2018-02-25T14:53:17.864+0800 I NETWORK  [conn5] received client metadata from 127.0.0.1:59818 conn: { driver: { name: "nodejs", version: "3.0.1" }, os: { type: "Darwin", name: "darwin", architecture: "x64", version: "17.0.0" }, platform: "Node.js v9.3.0, LE, mongodb-core: 3.0.1" }
+2018-02-25T14:53:19.563+0800 I NETWORK  [conn4] end connection 127.0.0.1:59815 (1 connection now open)
+2018-02-25T14:53:19.564+0800 I NETWORK  [conn5] end connection 127.0.0.1:59818 (0 connections now open)

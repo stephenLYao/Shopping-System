@@ -14,5 +14,4 @@ yarn-error.log*
 *.njsproj
 *.sln
 
-/server/db/data/*
-/server/db/logs/*
+db
