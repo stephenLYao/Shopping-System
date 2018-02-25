@@ -1,51 +1,27 @@
-2018-02-22T18:59:09.665+0800 I CONTROL  [initandlisten] MongoDB starting : pid=33160 port=27017 dbpath=/Users/stephenliu/Desktop/shopping/./server/db/data 64-bit host=STEVENYZLIU-MB0
-2018-02-22T18:59:09.665+0800 I CONTROL  [initandlisten] db version v3.6.2
-2018-02-22T18:59:09.665+0800 I CONTROL  [initandlisten] git version: 489d177dbd0f0420a8ca04d39fd78d0a2c539420
-2018-02-22T18:59:09.665+0800 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 0.9.8zh 14 Jan 2016
-2018-02-22T18:59:09.666+0800 I CONTROL  [initandlisten] allocator: system
-2018-02-22T18:59:09.666+0800 I CONTROL  [initandlisten] modules: none
-2018-02-22T18:59:09.666+0800 I CONTROL  [initandlisten] build environment:
-2018-02-22T18:59:09.666+0800 I CONTROL  [initandlisten]     distarch: x86_64
-2018-02-22T18:59:09.666+0800 I CONTROL  [initandlisten]     target_arch: x86_64
-2018-02-22T18:59:09.666+0800 I CONTROL  [initandlisten] options: { processManagement: { fork: true }, storage: { dbPath: "./server/db/data" }, systemLog: { destination: "file", path: "./server/db/logs/mongodb.log" } }
-2018-02-22T18:59:09.666+0800 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=7680M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),statistics_log=(wait=0),verbose=(recovery_progress),
-2018-02-22T18:59:09.763+0800 I CONTROL  [initandlisten] 
-2018-02-22T18:59:09.763+0800 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
-2018-02-22T18:59:09.763+0800 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
-2018-02-22T18:59:09.763+0800 I CONTROL  [initandlisten] 
-2018-02-22T18:59:09.763+0800 I CONTROL  [initandlisten] ** WARNING: This server is bound to localhost.
-2018-02-22T18:59:09.763+0800 I CONTROL  [initandlisten] **          Remote systems will be unable to connect to this server. 
-2018-02-22T18:59:09.763+0800 I CONTROL  [initandlisten] **          Start the server with --bind_ip <address> to specify which IP 
-2018-02-22T18:59:09.763+0800 I CONTROL  [initandlisten] **          addresses it should serve responses from, or with --bind_ip_all to
-2018-02-22T18:59:09.763+0800 I CONTROL  [initandlisten] **          bind to all interfaces. If this behavior is desired, start the
-2018-02-22T18:59:09.763+0800 I CONTROL  [initandlisten] **          server with --bind_ip 127.0.0.1 to disable this warning.
-2018-02-22T18:59:09.764+0800 I CONTROL  [initandlisten] 
-2018-02-22T18:59:09.769+0800 I STORAGE  [initandlisten] createCollection: admin.system.version with provided UUID: 6f056785-1c10-4aac-be18-71bb8a7aef64
-2018-02-22T18:59:09.792+0800 I COMMAND  [initandlisten] setting featureCompatibilityVersion to 3.6
-2018-02-22T18:59:09.799+0800 I STORAGE  [initandlisten] createCollection: local.startup_log with generated UUID: c8237ed6-29e8-4598-a18a-084e81d71146
-2018-02-22T18:59:09.821+0800 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory '/Users/stephenliu/Desktop/shopping/./server/db/data/diagnostic.data'
-2018-02-22T18:59:09.822+0800 I NETWORK  [initandlisten] waiting for connections on port 27017
-2018-02-22T19:03:50.718+0800 I NETWORK  [listener] connection accepted from 127.0.0.1:61903 #1 (1 connection now open)
-2018-02-22T19:03:50.742+0800 I NETWORK  [conn1] received client metadata from 127.0.0.1:61903 conn: { driver: { name: "nodejs", version: "2.2.34" }, os: { type: "Darwin", name: "darwin", architecture: "x64", version: "17.0.0" }, platform: "Node.js v6.4.0, LE, mongodb-core: 2.1.18" }
-2018-02-22T19:03:50.754+0800 I STORAGE  [conn1] createCollection: shopping.sessions with generated UUID: e73805d4-866a-4647-93c4-566d8fbfae29
-2018-02-22T19:03:50.780+0800 I INDEX    [conn1] build index on: shopping.sessions properties: { v: 2, key: { expires: 1 }, name: "expires_1", ns: "shopping.sessions", expireAfterSeconds: 0 }
-2018-02-22T19:03:50.780+0800 I INDEX    [conn1] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
-2018-02-22T19:03:50.785+0800 I INDEX    [conn1] build index done.  scanned 0 total records. 0 secs
-2018-02-22T19:03:51.726+0800 I NETWORK  [listener] connection accepted from 127.0.0.1:61908 #2 (2 connections now open)
-2018-02-22T19:03:51.730+0800 I NETWORK  [conn2] received client metadata from 127.0.0.1:61908 conn: { driver: { name: "nodejs", version: "3.0.1" }, os: { type: "Darwin", name: "darwin", architecture: "x64", version: "17.0.0" }, platform: "Node.js v6.4.0, LE, mongodb-core: 3.0.1" }
-2018-02-22T19:04:09.827+0800 I STORAGE  [thread3] createCollection: config.system.sessions with generated UUID: 4ef17192-5906-423e-83b5-4fb1513d8837
-2018-02-22T19:04:09.870+0800 I INDEX    [thread3] build index on: config.system.sessions properties: { v: 2, key: { lastUse: 1 }, name: "lsidTTLIndex", ns: "config.system.sessions", expireAfterSeconds: 1800 }
-2018-02-22T19:04:09.870+0800 I INDEX    [thread3] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
-2018-02-22T19:04:09.875+0800 I INDEX    [thread3] build index done.  scanned 0 total records. 0 secs
-2018-02-22T19:04:49.536+0800 I NETWORK  [conn2] end connection 127.0.0.1:61908 (1 connection now open)
-2018-02-22T19:04:49.536+0800 I NETWORK  [conn1] end connection 127.0.0.1:61903 (0 connections now open)
-2018-02-25T14:11:15.862+0800 I COMMAND  [PeriodicTaskRunner] task: UnusedLockCleaner took: 242ms
-2018-02-25T14:53:15.582+0800 I NETWORK  [listener] connection accepted from 127.0.0.1:59806 #3 (1 connection now open)
-2018-02-25T14:53:15.598+0800 I NETWORK  [conn3] received client metadata from 127.0.0.1:59806 conn: { driver: { name: "nodejs", version: "2.2.34" }, os: { type: "Darwin", name: "darwin", architecture: "x64", version: "17.0.0" }, platform: "Node.js v9.3.0, LE, mongodb-core: 2.1.18" }
-2018-02-25T14:53:16.395+0800 I NETWORK  [conn3] end connection 127.0.0.1:59806 (0 connections now open)
-2018-02-25T14:53:16.835+0800 I NETWORK  [listener] connection accepted from 127.0.0.1:59815 #4 (1 connection now open)
-2018-02-25T14:53:16.847+0800 I NETWORK  [conn4] received client metadata from 127.0.0.1:59815 conn: { driver: { name: "nodejs", version: "2.2.34" }, os: { type: "Darwin", name: "darwin", architecture: "x64", version: "17.0.0" }, platform: "Node.js v9.3.0, LE, mongodb-core: 2.1.18" }
-2018-02-25T14:53:17.859+0800 I NETWORK  [listener] connection accepted from 127.0.0.1:59818 #5 (2 connections now open)
-2018-02-25T14:53:17.864+0800 I NETWORK  [conn5] received client metadata from 127.0.0.1:59818 conn: { driver: { name: "nodejs", version: "3.0.1" }, os: { type: "Darwin", name: "darwin", architecture: "x64", version: "17.0.0" }, platform: "Node.js v9.3.0, LE, mongodb-core: 3.0.1" }
-2018-02-25T14:53:19.563+0800 I NETWORK  [conn4] end connection 127.0.0.1:59815 (1 connection now open)
-2018-02-25T14:53:19.564+0800 I NETWORK  [conn5] end connection 127.0.0.1:59818 (0 connections now open)
+2018-02-25T15:05:45.339+0800 I CONTROL  [initandlisten] MongoDB starting : pid=48738 port=27017 dbpath=/Users/stephenliu/Desktop/shopping/./server/db/data 64-bit host=STEVENYZLIU-MB0
+2018-02-25T15:05:45.340+0800 I CONTROL  [initandlisten] db version v3.6.2
+2018-02-25T15:05:45.340+0800 I CONTROL  [initandlisten] git version: 489d177dbd0f0420a8ca04d39fd78d0a2c539420
+2018-02-25T15:05:45.345+0800 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 0.9.8zh 14 Jan 2016
+2018-02-25T15:05:45.345+0800 I CONTROL  [initandlisten] allocator: system
+2018-02-25T15:05:45.345+0800 I CONTROL  [initandlisten] modules: none
+2018-02-25T15:05:45.345+0800 I CONTROL  [initandlisten] build environment:
+2018-02-25T15:05:45.345+0800 I CONTROL  [initandlisten]     distarch: x86_64
+2018-02-25T15:05:45.345+0800 I CONTROL  [initandlisten]     target_arch: x86_64
+2018-02-25T15:05:45.345+0800 I CONTROL  [initandlisten] options: { processManagement: { fork: true }, storage: { dbPath: "./server/db/data" }, systemLog: { destination: "file", path: "./server/db/logs/mongodb.log" } }
+2018-02-25T15:05:45.346+0800 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=7680M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),statistics_log=(wait=0),verbose=(recovery_progress),
+2018-02-25T15:05:45.447+0800 I CONTROL  [initandlisten] 
+2018-02-25T15:05:45.447+0800 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2018-02-25T15:05:45.447+0800 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2018-02-25T15:05:45.447+0800 I CONTROL  [initandlisten] 
+2018-02-25T15:05:45.447+0800 I CONTROL  [initandlisten] ** WARNING: This server is bound to localhost.
+2018-02-25T15:05:45.447+0800 I CONTROL  [initandlisten] **          Remote systems will be unable to connect to this server. 
+2018-02-25T15:05:45.447+0800 I CONTROL  [initandlisten] **          Start the server with --bind_ip <address> to specify which IP 
+2018-02-25T15:05:45.447+0800 I CONTROL  [initandlisten] **          addresses it should serve responses from, or with --bind_ip_all to
+2018-02-25T15:05:45.447+0800 I CONTROL  [initandlisten] **          bind to all interfaces. If this behavior is desired, start the
+2018-02-25T15:05:45.447+0800 I CONTROL  [initandlisten] **          server with --bind_ip 127.0.0.1 to disable this warning.
+2018-02-25T15:05:45.447+0800 I CONTROL  [initandlisten] 
+2018-02-25T15:05:45.461+0800 I STORAGE  [initandlisten] createCollection: admin.system.version with provided UUID: 085e98a7-8246-431f-9675-5bf94dda649d
+2018-02-25T15:05:45.488+0800 I COMMAND  [initandlisten] setting featureCompatibilityVersion to 3.6
+2018-02-25T15:05:45.496+0800 I STORAGE  [initandlisten] createCollection: local.startup_log with generated UUID: 4b47c56c-fb81-4ad2-85bd-ec267fbb2460
+2018-02-25T15:05:45.524+0800 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory '/Users/stephenliu/Desktop/shopping/./server/db/data/diagnostic.data'
+2018-02-25T15:05:45.526+0800 I NETWORK  [initandlisten] waiting for connections on port 27017
