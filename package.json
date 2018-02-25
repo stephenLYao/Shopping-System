@@ -13,7 +13,7 @@
     "build-server": "backpack build",
     "start-app": "cross-env NODE_ENV=production pm2 start server/app.js --node-args='--harmony'",
     "restart-app": "cross-env NODE_ENV=production pm2 restart server/app.js --node-args='--harmony'",
-    "start-db": "mongod --fork --dbpath ./server/db/data --logpath ./server/db/logs/mongodb.log",
+    "start-db": "mongod --fork --dbpath ./db/data --logpath ./db/logs/mongodb.log",
     "stop-db": "mongo --eval \"db.getSiblingDB('admin').shutdownServer()\"",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
