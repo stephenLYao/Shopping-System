@@ -218,6 +218,7 @@ var router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
 
 router.post('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* index */].post);
 router.post('/log-in', __WEBPACK_IMPORTED_MODULE_1__controllers__["b" /* logIn */].post);
+router.post('/log-out', __WEBPACK_IMPORTED_MODULE_1__controllers__["c" /* logOut */].post);
 
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
@@ -228,6 +229,7 @@ router.post('/log-in', __WEBPACK_IMPORTED_MODULE_1__controllers__["b" /* logIn *
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return index; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return logIn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return logOut; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(12);
@@ -384,6 +386,33 @@ var logIn = {
           }
         }
       }, _callee2, _this2, [[0, 17]]);
+    }))();
+  }
+};
+
+var logOut = {
+  post: function post(req, res) {
+    var _this3 = this;
+
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              try {
+                res.status(200).json({
+                  message: 'Sign out successful. Good bye! :)'
+                });
+              } catch (error) {
+                console.error(error);
+              }
+
+            case 1:
+            case 'end':
+              return _context3.stop();
+          }
+        }
+      }, _callee3, _this3);
     }))();
   }
 };

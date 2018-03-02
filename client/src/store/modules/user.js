@@ -3,6 +3,7 @@ import http from '@/service/http';
 export const state = () => {
   return {
     isAuthenticated: false, // 是否登录认证
+    token: '', // Token
     username: ''  // 用户名
   };
 };
@@ -30,6 +31,20 @@ export const mutations = {
   },
   LOG_IN_FAILD (state, error) {
     console.log('Log In Failure.');
+    console.error(error);
+  },
+  LOG_OUT_REQUEST (state) {
+    // send post request to revoke token.
+    console.log('Log out request pending....');
+  },
+  LOG_OUT_SUCCESS (state, message) {
+    // Cookies.remove('token')
+    state.isAuthenticated = false;
+    state.token = '';
+    state.username = '';
+    console.log('Sign out success!', message);
+  },
+  LOG_OUT_FAILURE (state, error) {
     console.error(error);
   }
 };
@@ -60,6 +75,16 @@ export const actions = {
       }
     } catch (error) {
       commit('LOG_IN_FAILD', error);
+    }
+  },
+
+  async logOut ({ commit }) {
+    try {
+      commit('LOG_OUT_REQUEST');
+      const { data } = await http.post('/users/log-out');
+      commit('LOG_OUT_SUCCESS', data);
+    } catch (error) {
+      commit('LOG_OUT_FAILD', error);
     }
   }
 };

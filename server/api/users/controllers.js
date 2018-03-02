@@ -63,3 +63,15 @@ export const logIn = {
     }
   }
 };
+
+export const logOut = {
+  async post (req, res) {
+    try {
+      res.status(200).json({
+        message: 'Sign out successful. Good bye! :)'
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+};
