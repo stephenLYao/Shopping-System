@@ -4,6 +4,7 @@ export const state = () => {
   return {
     isAuthenticated: false, // 是否登录认证
     token: '', // Token
+    guid: '',  // 用户 ID
     username: ''  // 用户名
   };
 };

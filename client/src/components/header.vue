@@ -1,18 +1,28 @@
 <template>
   <v-app>
     <v-navigation-drawer fixed app temporary v-model="drawer">
+      <v-card color="primary" dark>
+        <!-- src="http://p4zxobaq9.bkt.clouddn.com/bg.jpg" -->
+        <v-card-media
+          class="white--text"
+          height="200px"
+          src=''
+        >
+          <v-container fluid fill-height>
+            <v-layout align-center justify-center>
+              <v-flex xs12 sm8 md4>
+                <v-avatar size="60px">
+                  <img src="../assets/avatar.jpg" >
+                </v-avatar>
+                <v-content class="mt-4 subheading">
+                    {{ $store.state.user.isAuthenticated ? `Hello! ${$store.state.user.username}` : "您好，请登录" }}
+                </v-content>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card-media>
+      </v-card>
       <v-list v-if="!$store.state.user.isAuthenticated">
-        <v-list-tile avatar tag="div">
-          <v-list-tile-avatar>
-            <img src="../assets/avatar.jpg" >
-          </v-list-tile-avatar>
-          <v-list-tile-content>
-              <v-list-tile-title>
-                您好，请登录
-              </v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-divider></v-divider>
         <v-list-tile v-for="item in items1" :key="item.title" ripple router :to="item.to">
           <v-list-tile-content>
             <v-list-tile-content>{{ item.title }}</v-list-tile-content>
@@ -20,17 +30,6 @@
         </v-list-tile>
       </v-list>
       <v-list v-if="$store.state.user.isAuthenticated">
-        <v-list-tile avatar tag="div">
-          <v-list-tile-avatar>
-            <img src="../assets/avatar.jpg" >
-          </v-list-tile-avatar>
-          <v-list-tile-content>
-              <v-list-tile-title>
-                {{ $store.state.user.username }}
-              </v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-divider></v-divider>
         <v-list-tile v-for="item in items2" :key="item.title" ripple router :to="item.to">
           <v-list-tile-content>
             <v-list-tile-content>{{ item.title }}</v-list-tile-content>
@@ -50,7 +49,7 @@
       <v-btn icon>
         <v-icon>search</v-icon>
       </v-btn>
-      <v-btn icon>
+      <v-btn icon to="/carts">
         <v-icon>shopping_cart</v-icon>
       </v-btn>
     </v-toolbar>
@@ -75,10 +74,14 @@ export default {
       items2: [
         {
           title: '个人中心',
-          to: ''
+          to: '/profile'
         },
         {
           title: '购物车',
+          to: '/carts'
+        },
+        {
+          title: '购物记录',
           to: ''
         }
       ]
