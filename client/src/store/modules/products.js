@@ -2,21 +2,31 @@ import http from '@/service/http';
 
 export const state = () => {
   return {
-    recommends: []
+    lists: []
   };
 };
 
 export const mutations = {
-
+  GET_PROD_REQUEST () {
+    console.log('Get products pending...');
+  },
+  GET_PROD_SUCCESS (state, data) {
+    state.lists = data.lists;
+    console.log('Get products success!');
+  },
+  GET_PROD_FAILED (state, error) {
+    console.log('Get products failed' + error);
+  }
 };
 
 export const actions = {
-  async getRecommends ({ commit }) {
+  async getProducts ({ commit }, { tag }) {
     try {
-      const { data } = await http.get('/products/recommends');
-      commit('GET_REC_SUCCES', data);
+      commit('GET_PROD_REQUEST');
+      const { data } = await http.get(`/products/${tag}`);
+      commit('GET_PROD_SUCCESS', data);
     } catch (error) {
-      console.error(error);
+      commit('GET_PROD_FAILED', error);
     }
   }
 };

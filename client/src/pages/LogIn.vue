@@ -1,12 +1,13 @@
 <template>
   <v-app>
+    <Toolbar :name="name" :back="back"></Toolbar>
     <v-content>
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
               <v-toolbar dark color="primary">
-                <v-toolbar-title>Login</v-toolbar-title>
+                <v-toolbar-title>登录</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
                 <form @keyup.enter="submit">
@@ -21,7 +22,7 @@
                     label="password"
                     type="password"
                   ></v-text-field>
-                  <v-btn @click.native="submit">Log In</v-btn>
+                  <v-btn @click.native="submit">登录</v-btn>
                 </form>
               </v-card-text>
             </v-card>
@@ -33,13 +34,20 @@
 </template>
 
 <script>
+import Toolbar from '@/components/toolbar';
+
 export default {
   name: 'login',
   data () {
     return {
+      name: '登录',
+      back: '/',
       username: '',
       password: ''
     };
+  },
+  components: {
+    Toolbar
   },
   methods: {
     submit () {

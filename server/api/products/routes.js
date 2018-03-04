@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { recommends } from './controllers';
+import { products } from './controllers';
 
 const router = Router();
 
-router.get('/recommends', recommends.get);
+router.get('/:tag', products.get);
 
 export default router;
