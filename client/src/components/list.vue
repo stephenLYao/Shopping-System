@@ -1,8 +1,8 @@
 <template>
   <v-container fluid grid-list-md>
     <v-layout row wrap>
-      <v-flex xs6 v-for="list in lists" :key="list.id">
-        <v-card>
+      <v-flex xs6 v-for="(list, index) in lists" :key="index" >
+        <v-card :to="{ name: 'detail', params: { id: list.id }}">
           <v-card-media
             height="100px"
             :src="list.picUrl"
@@ -10,8 +10,8 @@
             hover
           ></v-card-media>
           <v-card-title>
-            <div class="desc">{{ list.desc }}</div>
-            <div class="price">¥ {{ list.price }}</div>
+            <v-content class="desc">{{ list.desc }}</v-content>
+            <v-content class="price">¥ {{ list.price }}</v-content>
           </v-card-title>
         </v-card>
       </v-flex>

@@ -53,14 +53,14 @@
         <v-icon>shopping_cart</v-icon>
       </v-btn>
       <v-tabs dark color="primary" show-arrows slot="extension" grow v-model="tabs">
-        <v-tab v-for="category in categories" :key="category.name" @click="getProducts(category.tag)" :tag="category.tag">
+        <v-tab v-for="(category, index) in categories" :key="index" @click="getProducts(category.tag)" :tag="category.tag">
           {{ category.name }}
         </v-tab>
         <v-tabs-slider color="white"></v-tabs-slider>
       </v-tabs>
     </v-toolbar>
     <v-tabs-items v-model="tabs" style="margin-top: 110px;">
-      <v-tab-item v-for="category in categories" :key="category.name">
+      <v-tab-item v-for="(category, index) in categories" :key="index">
         <List :lists="lists" :tag="tag"></List>
       </v-tab-item>
     </v-tabs-items>   
@@ -148,7 +148,7 @@ export default {
   methods: {
     logOut () {
       this.$store.dispatch('logOut').then(() => {
-        this.$router.replace({ name: 'home' });
+        this.$router.push('/');
       }).catch((error) => {
         console.log(error);
       });

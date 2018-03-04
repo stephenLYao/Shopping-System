@@ -85,7 +85,7 @@ export default {
         password1: this.password1,
         password2: this.password2
       }).then(() => {
-        this.$router.replace({ name: 'login' });
+        this.$router.push('/');
       }).catch((error) => {
         console.log(error);
       });
