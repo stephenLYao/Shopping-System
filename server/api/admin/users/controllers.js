@@ -1,31 +1,23 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dtime from 'time-formater';
-import { randId } from '../../utils/index';
-import User from './models';
-import { getId } from '../../utils/ids';
-import config from '../../config/default';
+import { randId } from '../../../utils/index';
+import Admin from './models';
+import User from '../../users/models';
+// import config from '../../config/default';
 
-export const index = {
+export const register = {
   async post (req, res) {
     try {
-      let { username, password1, password2 } = req.body;
-      if (password1 === password2) {
-        let password = await bcrypt.hash(password1, 10);
-        let id = await getId('user_id');
-        let createAt = dtime().format('YYYY-MM-DD HH:mm');
-        let newUser = new User({ id, username, password, createAt });
-        let savedUser = await newUser.save();
-        console.log('用户注册成功');
-        res.status(200).json({
-          message: `Thanks for signing up, ${savedUser.username}!`
-        });
-      } else {
-        console.error('用户密码不匹配');
-        res.status(400).json({
-          message: '密码不匹配'
-        });
-      }
+      let { username, password } = req.body;
+      let createAt = dtime().format('YYYY-MM-DD HH:mm');
+      let newPassword = await bcrypt.hash(password, 10);
+      let newUser = new Admin({ username, newPassword, createAt });
+      let savedUser = await newUser.save();
+      console.log('用户注册成功');
+      res.status(200).json({
+        message: `Thanks for signing up, ${savedUser.username}!`
+      });
     } catch (error) {
       console.error('用户注册失败');
       res.status(400).json({
@@ -39,7 +31,7 @@ export const logIn = {
   async post (req, res) {
     try {
       let { username, password } = req.body;
-      let user = await User.findOne({ username });
+      let user = await Admin.findOne({ username });
       console.log(user);
       if (user) {
         let passwordHash = user.password;
@@ -79,3 +71,30 @@ export const logOut = {
     }
   }
 };
+
+export async function getUserCounts (req, res) {
+  try {
+    const count = await User.count();
+    res.status(200).json({
+      count
+    });
+  } catch (error) {
+    res.status(503).json({
+      message: '获取用户数量失败'
+    });
+  }
+}
+
+export async function getUserLists (req, res) {
+  const { offset = 0, limit = 20 } = req.query;
+  try {
+    const users = await User.find({}).sort({user_id: -1}).limit(Number(limit)).skip(Number(offset));
+    res.status(200).json({
+      users
+    });
+  } catch (error) {
+    res.status(503).json({
+      message: '获取用户列表失败'
+    });
+  }
+}

@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
+  id: Number,
   username: {
     type: String,
     unique: true,
@@ -12,11 +13,7 @@ const userSchema = new mongoose.Schema({
     require: true,
     minlength: 6
   },
-  admin: {
-    type: Boolean,
-    default: false,
-    require: true
-  }
+  createAt: String
 });
 
 const User = mongoose.model('User', userSchema);

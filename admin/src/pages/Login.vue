@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { login } from '@/service/api';
 export default {
   data () {
     return {
@@ -43,7 +44,35 @@ export default {
     this.showLogin = true;
   },
   methods: {
-    submitForm (name) {}
+    async submitForm (name) {
+      this.$refs[name].validate(async (valid) => {
+        if (valid) {
+          const res = await login({
+            username: this.loginForm.username,
+            password: this.loginForm.password
+          });
+          if (res.status == 200) {
+							this.$message({
+                type: 'success',
+                message: '登录成功'
+              });
+							this.$router.push('manage')
+						}else{
+							this.$message({
+		            type: 'error',
+		            message: res.message
+		          });
+						}
+        } else {
+          this.$notify.error({
+            title: '错误',
+            message: '请输入正确的用户名密码',
+            offset: 100
+          });
+          return false;
+        }
+      });
+    }
   }
 };
 </script>

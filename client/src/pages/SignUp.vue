@@ -85,7 +85,7 @@ export default {
         password1: this.password1,
         password2: this.password2
       }).then(() => {
-        this.$router.push('/');
+        this.$router.push('/login');
       }).catch((error) => {
         console.log(error);
       });
