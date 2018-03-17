@@ -23,10 +23,10 @@ export const category = {
   },
   async post (req, res) {
     try {
-      const name = req.name;
+      const { name, tag } = req;
       const isExist = await Category.findOne({ name });
       if (!isExist) {
-        const category = new Category({ name });
+        const category = new Category({ name, tag });
         await category.save();
         res.status(200).json({
           message: '添加种类成功'

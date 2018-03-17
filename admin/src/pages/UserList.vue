@@ -48,8 +48,8 @@ export default {
       offset: 0,
       limit: 20,
       count: 0,
-      currentPage: 1,
-    }
+      currentPage: 1
+    };
   },
   components: {
     Header
@@ -85,7 +85,6 @@ export default {
               createAt: user.createAt
             });
           });
-          console.log(this.tableData)
         } else {
           this.$message({
             type: 'error',
@@ -96,13 +95,13 @@ export default {
         throw Error(error);
       }
     },
-    handleSizeChange(val) {
+    handleSizeChange (val) {
       console.log(`每页 ${val} 条`);
     },
-    handleCurrentChange(val) {
+    handleCurrentChange (val) {
       this.currentPage = val;
-      this.offset = (val - 1)*this.limit;
-      this.getUsers()
+      this.offset = (val - 1) * this.limit;
+      this.getUsers();
     }
   }
 };

@@ -1148,14 +1148,14 @@ var category = {
     var _this2 = this;
 
     return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-      var name, isExist, _category;
+      var name, tag, isExist, _category;
 
       return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.prev = 0;
-              name = req.name;
+              name = req.name, tag = req.tag;
               _context2.next = 4;
               return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].findOne({ name: name });
 
@@ -1167,7 +1167,7 @@ var category = {
                 break;
               }
 
-              _category = new __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */]({ name: name });
+              _category = new __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */]({ name: name, tag: tag });
               _context2.next = 9;
               return _category.save();
 

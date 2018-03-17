@@ -52,17 +52,17 @@ export default {
             password: this.loginForm.password
           });
           if (res.status === 200) {
-							this.$message({
-                type: 'success',
-                message: '登录成功'
-              });
-							this.$router.push('manage')
+            this.$message({
+              type: 'success',
+              message: '登录成功'
+            });
+            this.$router.push('manage');
           } else {
             this.$message({
               type: 'error',
               message: res.message
-		        });
-				  }
+            });
+          }
         } else {
           this.$notify.error({
             title: '错误',

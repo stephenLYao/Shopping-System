@@ -22,6 +22,9 @@
               <el-form-item label="商品种类" prop="name">
                 <el-input v-model="categoryForm.name"></el-input>
               </el-form-item>
+              <el-form-item label="商品tag" prop="tag">
+                <el-input v-model="categoryForm.tag"></el-input>
+              </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="submitCategoryForm('categoryForm')">提交</el-button>
               </el-form-item>
@@ -33,55 +36,47 @@
             <span>添加商品种类</span>
           </div>
         </el-form>
-        <!-- <header class="form_header">添加商品</header>
-        <el-form :model="foodForm" :rules="foodrules" ref="foodForm" label-width="110px" class="form food_form">
+        <header class="form_header">添加商品</header>
+        <el-form
+          :model="productsForm"
+          :rules="{ required: true, message: '请输入商品名称', trigger: 'blur' }"
+          ref="productsForm"
+          label-width="110px"
+          class="form products_form"
+        >
           <el-form-item label="商品名称" prop="name">
-            <el-input v-model="foodForm.name"></el-input>
+            <el-input v-model="productsForm.name"></el-input>
           </el-form-item>
-          <el-form-item label="商品活动" prop="activity">
-            <el-input v-model="foodForm.activity"></el-input>
-          </el-form-item>
-          <el-form-item label="商品品详情" prop="description">
-            <el-input v-model="foodForm.description"></el-input>
+          <el-form-item label="商品详情" prop="desc">
+            <el-input v-model="productsForm.desc"></el-input>
           </el-form-item>
           <el-form-item label="上传商品图片">
-            <el-upload
+            <!-- <el-upload
               class="avatar-uploader"
-              :action="baseUrl + '/v1/addimg/food'"
+              :action="baseUrl + '/v1/addimg/products'"
               :show-file-list="false"
               :on-success="uploadImg"
               :before-upload="beforeImgUpload">
-              <img v-if="foodForm.image_path" :src="baseImgPath + foodForm.image_path" class="avatar">
+              <img v-if="productsForm.image_path" :src="baseImgPath + productsForm.image_path" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-            </el-upload>
-          </el-form-item>
-          <el-form-item label="商品特点">
-            <el-select v-model="foodForm.attributes" multiple placeholder="请选择">
-              <el-option
-                v-for="item in attributes"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              >
-              </el-option>
-            </el-select>
+            </el-upload> -->
           </el-form-item>
           <el-form-item label="商品规格">
-              <el-radio class="radio" v-model="foodSpecs" label="one">单规格</el-radio>
-              <el-radio class="radio" v-model="foodSpecs" label="more">多规格</el-radio>
+              <el-radio class="radio" v-model="productsSpecs" label="one">单规格</el-radio>
+              <el-radio class="radio" v-model="productsSpecs" label="more">多规格</el-radio>
+              <el-button type="primary" v-show="productsSpecs !== 'one'" @click="dialogFormVisible = true" style="margin-left: 10px;">添加规格</el-button>
           </el-form-item>
-          <el-row v-if="foodSpecs == 'one'">
+          <el-row v-if="productsSpecs === 'one'">
             <el-form-item label="运费">
-              <el-input-number v-model="foodForm.specs[0].packing_fee" :min="0" :max="100"></el-input-number>
+              <el-input-number v-model="productsForm.specs[0].packFee" :min="0" :max="100"></el-input-number>
             </el-form-item>
             <el-form-item label="价格">
-              <el-input-number v-model="foodForm.specs[0].price" :min="0" :max="10000"></el-input-number>
+              <el-input-number v-model="productsForm.specs[0].price" :min="0" :max="10000"></el-input-number>
             </el-form-item>
           </el-row>
           <el-row v-else style="overflow: auto; text-align: center;">
-            <el-button type="primary" @click="dialogFormVisible = true" style="margin-bottom: 10px;">添加规格</el-button>
             <el-table
-              :data="foodForm.specs"
+              :data="productsForm.specs"
               style="margin-bottom: 20px;"
               :row-class-name="tableRowClassName"
             >
@@ -90,7 +85,7 @@
                 label="规格"
               ></el-table-column>
               <el-table-column
-                prop="packing_fee"
+                prop="packFee"
                 label="运费"
               ></el-table-column>
               <el-table-column
@@ -108,16 +103,19 @@
             </el-table>
           </el-row>
           <el-form-item>
-            <el-button type="primary" @click="addFood('foodForm')">确认添加商品</el-button>
+            <el-button type="primary" @click="addproducts('productsForm')">确认添加商品</el-button>
           </el-form-item>
-        </el-form> -->
-        <!-- <el-dialog title="添加规格" v-model="dialogFormVisible">
-          <el-form :rules="specsFormrules" :model="specsForm">
+        </el-form>
+        <el-dialog title="添加规格" v-model="dialogFormVisible">
+          <el-form
+            :rules="{required: true, message: '请输入规格', trigger: 'blur'}"
+            :model="specsForm"
+          >
             <el-form-item label="规格" label-width="100px" prop="specs">
               <el-input v-model="specsForm.specs" auto-complete="off"></el-input>
             </el-form-item>
             <el-form-item label="运费" label-width="100px">
-              <el-input-number v-model="specsForm.packing_fee" :min="0" :max="100"></el-input-number>
+              <el-input-number v-model="specsForm.packFee" :min="0" :max="100"></el-input-number>
             </el-form-item>
             <el-form-item label="价格" label-width="100px">
               <el-input-number v-model="specsForm.price" :min="0" :max="10000"></el-input-number>
@@ -125,9 +123,9 @@
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogFormVisible = false">取 消</el-button>
-            <el-button type="primary" @click="addspecs">确 定</el-button>
+            <el-button type="primary" @click="addSpecs">确 定</el-button>
           </div>
-        </el-dialog> -->
+        </el-dialog>
       </el-col>
     </el-row>
   </div>
@@ -143,8 +141,25 @@ export default {
       categoryForm: {
         categoryList: [],
         categorySelect: '',
-        name: ''
-      }
+        name: '',
+        tag: ''
+      },
+      productsForm: {
+        name: '',
+        desc: '',
+        specs: [{
+          packFee: 0,
+          price: 0
+        }]
+      },
+      specsForm: {
+        specs: '',
+        packFee: 0,
+        price: 0
+      },
+      showAddCategory: false,
+      productsSpecs: 'one',
+      dialogFormVisible: false
     };
   },
   components: {
@@ -155,7 +170,7 @@ export default {
   },
   computed: {
     selectValue: function () {
-      return this.categoryForm && this.categoryForm.categoryList[this.categoryForm.categorySelect];
+      return this.categoryForm && (this.categoryForm.categoryList[this.categoryForm.categorySelect] || {});
     }
   },
   methods: {
@@ -170,7 +185,7 @@ export default {
             });
           });
         } else {
-          console.log(result);
+          this.$message.error(result.message);
         }
       } catch (err) {
         console.log(err);
@@ -185,15 +200,14 @@ export default {
         if (valid) {
           const params = {
             name: this.categoryForm.name,
-            description: this.categoryForm.description,
-            restaurant_id: this.restaurant_id
+            tag: this.categoryForm.tag,
           };
           try {
             const result = await addCategory(params);
             if (result.status === 1) {
               this.initData();
               this.categoryForm.name = '';
-              this.categoryForm.description = '';
+              this.categoryForm.tag = '';
               this.showAddCategory = false;
               this.$message({
                 type: 'success',
@@ -212,6 +226,23 @@ export default {
           return false;
         }
       });
+    },
+    tableRowClassName (row, index) {
+      if (index === 1) {
+		    return 'info-row';
+		  } else if (index === 3) {
+		    return 'positive-row';
+		  }
+		  return '';
+		},
+    addproducts (productsForm) {
+
+    },
+    handleDelete (index) {
+      this.productsForm.specs.splice(index, 1);
+    },
+    addspecs () {
+      
     }
   }
 };
@@ -221,16 +252,16 @@ export default {
 	@import '../styles/_mixin.less';
 	.form{
 		min-width: 400px;
-		margin-bottom: 30px;
+    margin-bottom: 30px;
 		&:hover{
 			box-shadow: 0 0 8px 0 rgba(232,237,250,.6), 0 2px 4px 0 rgba(232,237,250,.5);
 			border-radius: 6px;
 			transition: all 400ms;
 		}
 	}
-	.food_form{
+	.products_form{
 		border: 1px solid #eaeefb;
-		padding: 10px 10px 0;
+		padding: 25px;
 	}
 	.form_header{
 		text-align: center;
@@ -238,7 +269,7 @@ export default {
 	}
 	.category_select{
 		border: 1px solid #eaeefb;
-		padding: 10px 30px 10px 10px;
+		padding: 30px;
 		border-top-right-radius: 6px;
 		border-top-left-radius: 6px;
 	}
