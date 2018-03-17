@@ -62,7 +62,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -79,6 +79,18 @@ module.exports = require("mongoose");
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+module.exports = require("babel-runtime/regenerator");
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("babel-runtime/helpers/asyncToGenerator");
+
+/***/ }),
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -90,37 +102,87 @@ module.exports = require("mongoose");
 });
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-module.exports = require("babel-runtime/regenerator");
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-module.exports = require("babel-runtime/helpers/asyncToGenerator");
-
-/***/ }),
 /* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("bcryptjs");
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+module.exports = require("jsonwebtoken");
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+module.exports = require("time-formater");
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export randId */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_crypto__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_crypto___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_crypto__);
+
+
+var randId = function randId() {
+  var method = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'base64';
+  return __WEBPACK_IMPORTED_MODULE_0_crypto___default.a.randomBytes(64).toString(method);
+};
+
+/***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
+
+
+var userSchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema({
+  id: Number,
+  username: {
+    type: String,
+    unique: true,
+    require: true,
+    minlength: 3
+  },
+  password: {
+    type: String,
+    require: true,
+    minlength: 6
+  },
+  createAt: String
+});
+
+var User = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('User', userSchema);
+
+/* harmony default export */ __webpack_exports__["a"] = (User);
+
+/***/ }),
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_cookie_parser__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_cookie_parser__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_cookie_parser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_cookie_parser__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_body_parser__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_body_parser__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_body_parser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_body_parser__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_connect_history_api_fallback__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_connect_history_api_fallback__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_connect_history_api_fallback___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_connect_history_api_fallback__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_mongoose__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_chalk__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_chalk__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_chalk___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_chalk__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__config_default__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__api_index__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__config_default__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__api_index__ = __webpack_require__(15);
 
 
 
@@ -175,39 +237,41 @@ app.listen(__WEBPACK_IMPORTED_MODULE_6__config_default__["a" /* default */].port
 });
 
 /***/ }),
-/* 6 */
+/* 11 */
 /***/ (function(module, exports) {
 
 module.exports = require("cookie-parser");
 
 /***/ }),
-/* 7 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = require("body-parser");
 
 /***/ }),
-/* 8 */
+/* 13 */
 /***/ (function(module, exports) {
 
 module.exports = require("connect-history-api-fallback");
 
 /***/ }),
-/* 9 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("chalk");
 
 /***/ }),
-/* 10 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users_routes__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__products_routes__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__admin_index__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users_routes__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__products_routes__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__admin_index__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__category_routes__ = __webpack_require__(29);
+
 
 
 
@@ -217,19 +281,20 @@ var router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
 
 router.use('/users', __WEBPACK_IMPORTED_MODULE_1__users_routes__["a" /* default */]);
 router.use('/products', __WEBPACK_IMPORTED_MODULE_2__products_routes__["a" /* default */]);
+router.use('/category', __WEBPACK_IMPORTED_MODULE_4__category_routes__["a" /* default */]);
 
 router.use('/admin', __WEBPACK_IMPORTED_MODULE_3__admin_index__["a" /* default */]);
 
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
-/* 11 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(17);
 
 
 
@@ -242,27 +307,27 @@ router.post('/log-out', __WEBPACK_IMPORTED_MODULE_1__controllers__["c" /* logOut
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
-/* 12 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return index; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return logIn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return logOut; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_bcryptjs__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_bcryptjs__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_bcryptjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_bcryptjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jsonwebtoken__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jsonwebtoken__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jsonwebtoken___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jsonwebtoken__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_time_formater__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_index__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_ids__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__config_default__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_index__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_ids__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__config_default__ = __webpack_require__(4);
 
 
 
@@ -448,368 +513,20 @@ var logOut = {
 };
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-module.exports = require("bcryptjs");
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-module.exports = require("jsonwebtoken");
-
-/***/ }),
-/* 15 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export randId */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_crypto__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_crypto___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_crypto__);
-
-
-var randId = function randId() {
-  var method = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'base64';
-  return __WEBPACK_IMPORTED_MODULE_0_crypto___default.a.randomBytes(64).toString(method);
-};
-
-/***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports) {
 
 module.exports = require("crypto");
-
-/***/ }),
-/* 17 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-
-
-var userSchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema({
-  id: Number,
-  username: {
-    type: String,
-    unique: true,
-    require: true,
-    minlength: 3
-  },
-  password: {
-    type: String,
-    require: true,
-    minlength: 6
-  },
-  createAt: String
-});
-
-var User = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('User', userSchema);
-
-/* harmony default export */ __webpack_exports__["a"] = (User);
-
-/***/ }),
-/* 18 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(19);
-
-
-
-var router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
-
-router.get('/:tag', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* products */].get);
-
-/* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
 /* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return products; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models__ = __webpack_require__(20);
-
-
-
-
-var products = {
-  get: function get(req, res) {
-    var _this = this;
-
-    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-      var category;
-      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              try {
-                category = req.params.tag;
-
-                if (category === 'recommends') {
-                  res.json({
-                    lists: recommends
-                  });
-                }
-              } catch (error) {
-                console.log(error);
-              }
-
-            case 1:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, _this);
-    }))();
-  }
-};
-
-var recommends = [{
-  id: 1,
-  picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
-  desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
-  price: 8688,
-  tag: 'appliances'
-}, {
-  id: 1,
-  picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
-  desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
-  price: 8688,
-  tag: 'appliances'
-}, {
-  id: 1,
-  picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
-  desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
-  price: 8688,
-  tag: 'appliances'
-}, {
-  id: 1,
-  picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
-  desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
-  price: 8688,
-  tag: 'appliances'
-}, {
-  id: 1,
-  picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
-  desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
-  price: 8688,
-  tag: 'appliances'
-}, {
-  id: 1,
-  picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
-  desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
-  price: 8688,
-  tag: 'appliances'
-}];
-
-/***/ }),
-/* 20 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-
-
-var productsSchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema({
-  id: Number,
-  pic_url: String,
-  desc: String,
-  price: Number,
-  tag: String
-});
-
-var Products = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Products', productsSchema);
-
-/* unused harmony default export */ var _unused_webpack_default_export = (Products);
-
-/***/ }),
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(25);
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports) {
-
-
-var TimeFormater = function (input) {
-  return new TimeFormater.fn.init(input);
-}
-
-TimeFormater.fn = TimeFormater.prototype = {
-  constructor: TimeFormater,
-  init: function (input) {
-    if (typeof input == 'string' || typeof input == 'number') {
-      this[0] = new Date(input);
-    } else if (input instanceof Date) {
-      this[0] = input;
-    } else {
-      this[0] = new Date();
-    }
-    return this;
-  },
-  format: function (str) {
-    var that = this;
-    if (typeof str === 'string') {
-      return str.replace(/Y{4}|M{1,4}|Do|D{1,2}|d{1,4}|Q|H{1,2}|h{1,2}|m{1,2}|s{1,2}|S{1,3}|A|a|x|X/g, function (match) {
-        return that[match] ? that[match]() : match;
-      });
-    } else {
-      return that.toLocaleString();
-    }
-  },
-  fromNow: function () {
-    var oldTime = this[0].getTime();
-    var newTime = Date.now();
-    var diff = parseInt(newTime - oldTime);
-    if (diff < 10000) {
-      return '刚刚';
-    } else if (diff < 60000) {
-      return parseInt(diff / 1000) + '秒前';
-    } else if (diff < 3600000) {
-      return parseInt(diff / 60000) + '分钟前';
-    } else if (diff < 86400000) {
-      return parseInt(diff / 3600000) + '小时前';
-    } else if (diff < 2592000000) {
-      return parseInt(diff / 86400000) + '天前';
-    } else if (diff < 31104000000) {
-      return parseInt(diff / 2592000000) + '月前';
-    } else {
-      return parseInt(diff / 31104000000) + '年前';
-    }
-  },
-  toDouble: function (num) {
-    return num < 10 ? '0' + num : num;
-  },
-  YYYY: function () {
-    return this[0].getFullYear();
-  },
-  Q: function () {
-    return Math.ceil(this.M() / 3);
-  },
-  M: function () {
-    return this[0].getMonth() + 1;
-  },
-  MM: function () {
-    return this.toDouble(this.M());
-  },
-  MMM: function () {
-    return this.M() + '月';
-  },
-  MMMM: function () {
-    var str = '一,二,三,四,五,六,七,八,九,十,十一,十二';
-    return str.split(',')[this.M() - 1] + '月';
-  },
-  D: function () {
-    return this[0].getDate();
-  },
-  Do: function () {
-    return this.D() + '日';
-  },
-  DD: function () {
-    return this.toDouble(this.D());
-  },
-  d: function () {
-    return this[0].getDay();
-  },
-  dd: function () {
-    var str = '日一二三四五六';
-    return str[this.d()];
-  },
-  ddd: function () {
-    return '周' + this.dd();
-  },
-  dddd: function () {
-    return '星期' + this.dd();
-  },
-  H: function () {
-    return this[0].getHours();
-  },
-  HH: function () {
-    return this.toDouble(this.H());
-  },
-  h: function () {
-    var hour = this.H();
-    return hour == 0 ? 12 : hour;
-  },
-  hh: function () {
-    return this.toDouble(this.h());
-  },
-  m: function () {
-    return this[0].getMinutes();
-  },
-  mm: function () {
-    return this.toDouble(this.m());
-  },
-  s: function () {
-    return this[0].getSeconds();
-  },
-  ss: function () {
-    return this.toDouble(this.s());
-  },
-  SSS: function () {
-    return this[0].getMilliseconds();
-  },
-  SS: function () {
-    return parseInt(this.SSS() / 10);
-  },
-  S: function () {
-    return parseInt(this.SS() / 10);
-  },
-  A: function () {
-    var hm = this.H() * 100 + this.m();
-    if (hm < 600) {
-      return '凌晨';
-    } else if (hm < 900) {
-      return '早上';
-    } else if (hm < 1130) {
-      return '上午';
-    } else if (hm < 1230) {
-      return '中午';
-    } else if (hm < 1800) {
-      return '下午';
-    } else {
-      return '晚上';
-    }
-  },
-  a: function () {
-    return this.A();
-  },
-  x: function () {
-    return this[0].getTime();
-  },
-  X: function () {
-    return parseInt(this.x() / 1000);
-  }
-};
-
-TimeFormater.fn.init.prototype = TimeFormater.fn;
-
-module.exports = TimeFormater;
-
-/***/ }),
-/* 26 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getId; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mongoose__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_mongoose__);
@@ -892,13 +609,136 @@ var getId = function () {
 /* unused harmony default export */ var _unused_webpack_default_export = (Ids);
 
 /***/ }),
-/* 27 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users_routes__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(21);
+
+
+
+var router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
+
+router.get('/:tag', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* products */].get);
+
+/* harmony default export */ __webpack_exports__["a"] = (router);
+
+/***/ }),
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return products; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models__ = __webpack_require__(22);
+
+
+
+
+var products = {
+  get: function get(req, res) {
+    var _this = this;
+
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+      var category;
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              try {
+                category = req.params.tag;
+
+                if (category === 'recommends') {
+                  res.json({
+                    lists: recommends
+                  });
+                }
+              } catch (error) {
+                console.log(error);
+              }
+
+            case 1:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, _this);
+    }))();
+  }
+};
+
+var recommends = [{
+  id: 1,
+  picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
+  desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
+  price: 8688,
+  tag: 'appliances'
+}, {
+  id: 1,
+  picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
+  desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
+  price: 8688,
+  tag: 'appliances'
+}, {
+  id: 1,
+  picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
+  desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
+  price: 8688,
+  tag: 'appliances'
+}, {
+  id: 1,
+  picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
+  desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
+  price: 8688,
+  tag: 'appliances'
+}, {
+  id: 1,
+  picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
+  desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
+  price: 8688,
+  tag: 'appliances'
+}, {
+  id: 1,
+  picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
+  desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
+  price: 8688,
+  tag: 'appliances'
+}];
+
+/***/ }),
+/* 22 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
+
+
+var productsSchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema({
+  id: Number,
+  pic_url: String,
+  desc: String,
+  price: Number,
+  tag: String
+});
+
+var Products = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Products', productsSchema);
+
+/* unused harmony default export */ var _unused_webpack_default_export = (Products);
+
+/***/ }),
+/* 23 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users_routes__ = __webpack_require__(24);
 
 
 
@@ -909,13 +749,13 @@ router.use('/user', __WEBPACK_IMPORTED_MODULE_1__users_routes__["a" /* default *
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
-/* 28 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(25);
 
 
 
@@ -930,7 +770,7 @@ router.get('/lists', __WEBPACK_IMPORTED_MODULE_1__controllers__["b" /* getUserLi
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
-/* 29 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -939,19 +779,19 @@ router.get('/lists', __WEBPACK_IMPORTED_MODULE_1__controllers__["b" /* getUserLi
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return logOut; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getUserCounts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getUserLists; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_bcryptjs__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_bcryptjs__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_bcryptjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_bcryptjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jsonwebtoken__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jsonwebtoken__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jsonwebtoken___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jsonwebtoken__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_time_formater__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_index__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__users_models__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_index__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__users_models__ = __webpack_require__(9);
 
 
 
@@ -1200,7 +1040,7 @@ var getUserLists = function () {
 }();
 
 /***/ }),
-/* 30 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1221,6 +1061,190 @@ var adminSchema = new Schema({
 var Admin = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Admin', adminSchema);
 
 /* harmony default export */ __webpack_exports__["a"] = (Admin);
+
+/***/ }),
+/* 27 */,
+/* 28 */,
+/* 29 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(30);
+
+
+
+var router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
+
+router.get('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* category */].get);
+router.post('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* category */].post);
+
+/* harmony default export */ __webpack_exports__["a"] = (router);
+
+/***/ }),
+/* 30 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return category; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models__ = __webpack_require__(31);
+
+
+
+
+var category = {
+  get: function get(req, res) {
+    var _this = this;
+
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+      var categories;
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].find({}, function (err, data) {
+                if (!err) {
+                  if (data && data.length < 1) {
+                    for (var i = 0; i < INITCATEGORY.length; i++) {
+                      __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].create(INITCATEGORY[i]);
+                    }
+                  }
+                }
+              });
+
+            case 3:
+              categories = _context.sent;
+
+              res.status(200).json({
+                categories: categories
+              });
+              _context.next = 10;
+              break;
+
+            case 7:
+              _context.prev = 7;
+              _context.t0 = _context['catch'](0);
+
+              res.status(1).json({
+                message: '获取种类失败'
+              });
+
+            case 10:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, _this, [[0, 7]]);
+    }))();
+  },
+  post: function post(req, res) {
+    var _this2 = this;
+
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+      var name, isExist, _category;
+
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              name = req.name;
+              _context2.next = 4;
+              return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].findOne({ name: name });
+
+            case 4:
+              isExist = _context2.sent;
+
+              if (isExist) {
+                _context2.next = 12;
+                break;
+              }
+
+              _category = new __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */]({ name: name });
+              _context2.next = 9;
+              return _category.save();
+
+            case 9:
+              res.status(200).json({
+                message: '添加种类成功'
+              });
+              _context2.next = 13;
+              break;
+
+            case 12:
+              res.status(1).json({
+                message: '种类名已存在'
+              });
+
+            case 13:
+              _context2.next = 18;
+              break;
+
+            case 15:
+              _context2.prev = 15;
+              _context2.t0 = _context2['catch'](0);
+
+              res.status(1).json({
+                message: '添加种类失败'
+              });
+
+            case 18:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, _this2, [[0, 15]]);
+    }))();
+  }
+};
+
+var INITCATEGORY = [{
+  name: '服装',
+  tag: 'clothes'
+}, {
+  name: '鞋靴',
+  tag: 'shoes'
+}, {
+  name: '家电',
+  tag: 'appliances'
+}, {
+  name: '运动',
+  tag: 'sports'
+}, {
+  name: '美食',
+  tag: 'foods'
+}, {
+  name: '家具',
+  tag: 'furnitures'
+}, {
+  name: '汽车',
+  tag: 'cars'
+}];
+
+/***/ }),
+/* 31 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
+
+
+var categorySchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema({
+  name: String,
+  tag: String
+});
+
+var Category = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Category', categorySchema);
+
+/* harmony default export */ __webpack_exports__["a"] = (Category);
 
 /***/ })
 /******/ ]);

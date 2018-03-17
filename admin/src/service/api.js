@@ -24,3 +24,13 @@ export const getAllUserCounts = () => {
 export const getUserLists = (data) => {
   return http.get('/admin/user/lists?' + data);
 };
+
+// 获取商品种类
+export const getCategory = () => {
+  return http.get('/category');
+};
+
+// 添加商品种类
+export const addCategory = (data) => {
+  return http.post('/category', data);
+};

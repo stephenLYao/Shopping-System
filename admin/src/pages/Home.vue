@@ -40,9 +40,7 @@ export default {
     this.getData();
   },
   methods: {
-    async getData () {
-      
-    }
+    async getData () {}
   }
 };
 </script>
