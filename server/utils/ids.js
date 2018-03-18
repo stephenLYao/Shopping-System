@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
 
-const types = ['user_id'];
+const types = ['user_id', 'product_id'];
 const idsSchema = new mongoose.Schema({
-  // food_id: Number,
   // order_id: Number,
   // address_id: Number,
   // cart_id: Number,
@@ -11,7 +10,8 @@ const idsSchema = new mongoose.Schema({
   // item_id: Number,
   // sku_id: Number,
   // admin_id: Number,
-  user_id: Number
+  user_id: Number,
+  product_id: Number
 });
 
 const Ids = mongoose.model('Ids', idsSchema);
@@ -19,7 +19,8 @@ Ids.findOne((err, data) => {
   if (err) throw Error(err);
   if (!data) {
     const newIds = new Ids({
-      user_id: 0
+      user_id: 0,
+      product_id: 0
     });
     newIds.save();
   }

@@ -93,7 +93,7 @@
                 label="价格"
               ></el-table-column>
               <el-table-column label="操作">
-                <template scope="scope"> 
+                <template slot-scope> 
                   <el-button
                     size="small"
                     type="danger"
@@ -123,7 +123,7 @@
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogFormVisible = false">取 消</el-button>
-            <el-button type="primary" @click="addSpecs">确 定</el-button>
+            <el-button type="primary" @click="addSpecs()">确 定</el-button>
           </div>
         </el-dialog>
       </el-col>
@@ -133,7 +133,7 @@
 
 <script>
 import Header from '@/components/header';
-import {getCategory, addCategory} from '@/service/api';
+import {getCategory, addCategory, addProducts} from '@/service/api';
 // import {baseUrl, baseImgPath} from '@/config/env'
 export default {
   data () {
@@ -148,6 +148,7 @@ export default {
         name: '',
         desc: '',
         specs: [{
+          specs: '',
           packFee: 0,
           price: 0
         }]
@@ -194,13 +195,12 @@ export default {
     checkCategory () {
       this.showAddCategory = !this.showAddCategory;
     },
-
     submitCategoryForm (categoryForm) {
       this.$refs[categoryForm].validate(async (valid) => {
         if (valid) {
           const params = {
             name: this.categoryForm.name,
-            tag: this.categoryForm.tag,
+            tag: this.categoryForm.tag
           };
           try {
             const result = await addCategory(params);
@@ -229,20 +229,53 @@ export default {
     },
     tableRowClassName (row, index) {
       if (index === 1) {
-		    return 'info-row';
-		  } else if (index === 3) {
-		    return 'positive-row';
-		  }
-		  return '';
-		},
-    addproducts (productsForm) {
-
+        return 'info-row';
+      } else if (index === 3) {
+        return 'positive-row';
+      }
+      return '';
     },
     handleDelete (index) {
       this.productsForm.specs.splice(index, 1);
     },
-    addspecs () {
-      
+    addSpecs () {
+      this.productsForm.specs.push(this.specsForm);
+      this.specsForm = {
+        specs: '',
+        packFee: 0,
+        price: 0
+      };
+      this.dialogFormVisible = false;
+    },
+    addproducts (productsForm) {
+      this.$refs[productsForm].validate(async (valid) => {
+        if (valid) {
+          const params = {
+            ...this.productsForm,
+            category: this.selectValue.label
+          };
+          try {
+            const result = await addProducts(params);
+            if (result.status === 200) {
+              this.$message({
+                type: 'success',
+                message: '添加成功'
+              });
+            } else {
+              this.$message.error('添加失败');
+            }
+          } catch (error) {
+            this.$message.error('添加失败');
+          }
+        } else {
+          this.$notify.error({
+            title: '错误',
+            message: '请检查输入是否正确',
+            offset: 100
+          });
+          return false;
+        }
+      });
     }
   }
 };

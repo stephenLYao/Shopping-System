@@ -18,7 +18,8 @@
         "istanbul",
         "transform-async-to-generator",
         "transform-es2015-modules-commonjs",
-        "transform-export-extensions"
+        "transform-export-extensions",
+        "transform-object-rest-spread"
       ]
     }
   }

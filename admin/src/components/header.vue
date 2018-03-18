@@ -60,6 +60,7 @@ export default {
   .wh(36px, 36px);
   border-radius: 50%;
   margin-right: 37px;
+  cursor: pointer;
 }
 .el-dropdown-menu__item{
   text-align: center;

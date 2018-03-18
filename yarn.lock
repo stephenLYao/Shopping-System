@@ -797,7 +797,7 @@ babel-plugin-transform-export-extensions@^6.22.0:
     babel-plugin-syntax-export-extensions "^6.8.0"
     babel-runtime "^6.22.0"
 
-babel-plugin-transform-object-rest-spread@^6.20.2, babel-plugin-transform-object-rest-spread@^6.22.0:
+babel-plugin-transform-object-rest-spread@^6.20.2, babel-plugin-transform-object-rest-spread@^6.22.0, babel-plugin-transform-object-rest-spread@^6.26.0:
   version "6.26.0"
   resolved "https://registry.npmjs.org/babel-plugin-transform-object-rest-spread/-/babel-plugin-transform-object-rest-spread-6.26.0.tgz#0f36692d50fef6b7e2d4b3ac1478137a963b7b06"
   dependencies:
@@ -3077,6 +3077,10 @@ formatio@1.2.0, formatio@^1.2.0:
   resolved "https://registry.npmjs.org/formatio/-/formatio-1.2.0.tgz#f3b2167d9068c4698a8d51f4f760a39a54d818eb"
   dependencies:
     samsam "1.x"
+
+formidable@^1.2.0:
+  version "1.2.0"
+  resolved "http://registry.npm.taobao.org/formidable/download/formidable-1.2.0.tgz#ce291bfec67c176e282f891ece2c37de0c83ae84"
 
 forwarded@~0.1.2:
   version "0.1.2"

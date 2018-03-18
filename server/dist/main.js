@@ -62,7 +62,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -125,7 +125,7 @@ module.exports = require("time-formater");
 
 "use strict";
 /* unused harmony export randId */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_crypto__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_crypto__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_crypto___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_crypto__);
 
 
@@ -168,21 +168,112 @@ var User = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('User', userSc
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getId; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mongoose__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_mongoose__);
+
+
+
+
+var types = ['user_id', 'product_id'];
+var idsSchema = new __WEBPACK_IMPORTED_MODULE_2_mongoose___default.a.Schema({
+  // order_id: Number,
+  // address_id: Number,
+  // cart_id: Number,
+  // img_id: Number,
+  // category_id: Number,
+  // item_id: Number,
+  // sku_id: Number,
+  // admin_id: Number,
+  user_id: Number,
+  product_id: Number
+});
+
+var Ids = __WEBPACK_IMPORTED_MODULE_2_mongoose___default.a.model('Ids', idsSchema);
+Ids.findOne(function (err, data) {
+  if (err) throw Error(err);
+  if (!data) {
+    var newIds = new Ids({
+      user_id: 0,
+      product_id: 0
+    });
+    newIds.save();
+  }
+});
+var getId = function () {
+  var _ref = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(type) {
+    var id;
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            if (types.includes(type)) {
+              _context.next = 3;
+              break;
+            }
+
+            console.log('类型错误');
+            return _context.abrupt('return');
+
+          case 3:
+            _context.prev = 3;
+            _context.next = 6;
+            return Ids.findOne();
+
+          case 6:
+            id = _context.sent;
+
+            id[type]++;
+            _context.next = 10;
+            return id.save();
+
+          case 10:
+            return _context.abrupt('return', id[type]);
+
+          case 13:
+            _context.prev = 13;
+            _context.t0 = _context['catch'](3);
+
+            console.log('获取Id失败：' + _context.t0);
+
+          case 16:
+          case 'end':
+            return _context.stop();
+        }
+      }
+    }, _callee, this, [[3, 13]]);
+  }));
+
+  return function getId(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+/* unused harmony default export */ var _unused_webpack_default_export = (Ids);
+
+/***/ }),
+/* 11 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_cookie_parser__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_cookie_parser__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_cookie_parser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_cookie_parser__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_body_parser__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_body_parser__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_body_parser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_body_parser__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_connect_history_api_fallback__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_connect_history_api_fallback__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_connect_history_api_fallback___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_connect_history_api_fallback__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_mongoose__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_chalk__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_chalk__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_chalk___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_chalk__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__config_default__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__api_index__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__api_index__ = __webpack_require__(16);
 
 
 
@@ -237,40 +328,40 @@ app.listen(__WEBPACK_IMPORTED_MODULE_6__config_default__["a" /* default */].port
 });
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = require("cookie-parser");
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 module.exports = require("body-parser");
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("connect-history-api-fallback");
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = require("chalk");
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users_routes__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users_routes__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__products_routes__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__admin_index__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__category_routes__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__admin_index__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__category_routes__ = __webpack_require__(28);
 
 
 
@@ -288,13 +379,13 @@ router.use('/admin', __WEBPACK_IMPORTED_MODULE_3__admin_index__["a" /* default *
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(18);
 
 
 
@@ -307,7 +398,7 @@ router.post('/log-out', __WEBPACK_IMPORTED_MODULE_1__controllers__["c" /* logOut
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -326,7 +417,7 @@ router.post('/log-out', __WEBPACK_IMPORTED_MODULE_1__controllers__["c" /* logOut
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_time_formater__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_index__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_ids__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_ids__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__config_default__ = __webpack_require__(4);
 
 
@@ -513,100 +604,10 @@ var logOut = {
 };
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 module.exports = require("crypto");
-
-/***/ }),
-/* 19 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getId; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mongoose__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_mongoose__);
-
-
-
-
-var types = ['user_id'];
-var idsSchema = new __WEBPACK_IMPORTED_MODULE_2_mongoose___default.a.Schema({
-  // food_id: Number,
-  // order_id: Number,
-  // address_id: Number,
-  // cart_id: Number,
-  // img_id: Number,
-  // category_id: Number,
-  // item_id: Number,
-  // sku_id: Number,
-  // admin_id: Number,
-  user_id: Number
-});
-
-var Ids = __WEBPACK_IMPORTED_MODULE_2_mongoose___default.a.model('Ids', idsSchema);
-Ids.findOne(function (err, data) {
-  if (err) throw Error(err);
-  if (!data) {
-    var newIds = new Ids({
-      user_id: 0
-    });
-    newIds.save();
-  }
-});
-var getId = function () {
-  var _ref = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(type) {
-    var id;
-    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            if (types.includes(type)) {
-              _context.next = 3;
-              break;
-            }
-
-            console.log('类型错误');
-            return _context.abrupt('return');
-
-          case 3:
-            _context.prev = 3;
-            _context.next = 6;
-            return Ids.findOne();
-
-          case 6:
-            id = _context.sent;
-
-            id[type]++;
-            _context.next = 10;
-            return id.save();
-
-          case 10:
-            return _context.abrupt('return', id[type]);
-
-          case 13:
-            _context.prev = 13;
-            _context.t0 = _context['catch'](3);
-
-            console.log('获取Id失败：' + _context.t0);
-
-          case 16:
-          case 'end':
-            return _context.stop();
-        }
-      }
-    }, _callee, this, [[3, 13]]);
-  }));
-
-  return function getId(_x) {
-    return _ref.apply(this, arguments);
-  };
-}();
-/* unused harmony default export */ var _unused_webpack_default_export = (Ids);
 
 /***/ }),
 /* 20 */
@@ -621,7 +622,8 @@ var getId = function () {
 
 var router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
 
-router.get('/:tag', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* products */].get);
+router.get('/:category', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* products */].get);
+router.post('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* products */].post);
 
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
@@ -636,6 +638,11 @@ router.get('/:tag', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* products *
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_formidable__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_formidable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_formidable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_ids__ = __webpack_require__(10);
+
+
 
 
 
@@ -651,7 +658,7 @@ var products = {
           switch (_context.prev = _context.next) {
             case 0:
               try {
-                category = req.params.tag;
+                category = req.params.category;
 
                 if (category === 'recommends') {
                   res.json({
@@ -668,6 +675,91 @@ var products = {
           }
         }
       }, _callee, _this);
+    }))();
+  },
+  post: function post(req, res) {
+    var _this2 = this;
+
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+      var _req$body, name, desc, category, specs, id, monthsales, newProduct, productsSpecs, product;
+
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _req$body = req.body, name = _req$body.name, desc = _req$body.desc, category = _req$body.category, specs = _req$body.specs;
+              _context2.next = 4;
+              return Object(__WEBPACK_IMPORTED_MODULE_4__utils_ids__["a" /* getId */])('product_id');
+
+            case 4:
+              id = _context2.sent;
+              monthsales = Math.ceil(Math.random() * 1000);
+              newProduct = {
+                id: id,
+                name: name,
+                desc: desc,
+                category: category,
+                month_sales: monthsales,
+                specs: [],
+                comments: []
+              };
+              productsSpecs = [];
+
+              if (specs.length > 0) {
+                specs.forEach(function (item) {
+                  productsSpecs.push({
+                    spec_name: item.specs,
+                    pack_fee: item.packFee,
+                    price: item.price
+                  });
+                });
+              }
+              newProduct.specs = productsSpecs;
+              _context2.prev = 10;
+              _context2.next = 13;
+              return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].create(newProduct);
+
+            case 13:
+              product = _context2.sent;
+              _context2.next = 16;
+              return product.save();
+
+            case 16:
+              res.status(200).json({
+                message: '添加商品成功'
+              });
+              _context2.next = 23;
+              break;
+
+            case 19:
+              _context2.prev = 19;
+              _context2.t0 = _context2['catch'](10);
+
+              console.log('添加商品失败', _context2.t0);
+              res.status(400).json({
+                message: '添加商品失败'
+              });
+
+            case 23:
+              _context2.next = 29;
+              break;
+
+            case 25:
+              _context2.prev = 25;
+              _context2.t1 = _context2['catch'](0);
+
+              console.log('添加商品失败', _context2.t1);
+              res.status(400).json({
+                message: '添加商品失败'
+              });
+
+            case 29:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, _this2, [[0, 25], [10, 19]]);
     }))();
   }
 };
@@ -721,24 +813,38 @@ var recommends = [{
 
 var productsSchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema({
   id: Number,
-  pic_url: String,
+  pic_url: [String],
+  name: String,
   desc: String,
-  price: Number,
-  tag: String
+  category: String,
+  month_sales: Number,
+  specs: [{
+    spec_name: String,
+    pack_fee: Number,
+    price: Number,
+    sold_out: false
+  }],
+  comments: [String]
 });
 
 var Products = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Products', productsSchema);
 
-/* unused harmony default export */ var _unused_webpack_default_export = (Products);
+/* harmony default export */ __webpack_exports__["a"] = (Products);
 
 /***/ }),
 /* 23 */
+/***/ (function(module, exports) {
+
+module.exports = require("formidable");
+
+/***/ }),
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users_routes__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users_routes__ = __webpack_require__(25);
 
 
 
@@ -749,13 +855,13 @@ router.use('/user', __WEBPACK_IMPORTED_MODULE_1__users_routes__["a" /* default *
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(26);
 
 
 
@@ -770,7 +876,7 @@ router.get('/lists', __WEBPACK_IMPORTED_MODULE_1__controllers__["b" /* getUserLi
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -790,7 +896,7 @@ router.get('/lists', __WEBPACK_IMPORTED_MODULE_1__controllers__["b" /* getUserLi
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_time_formater__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_index__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__users_models__ = __webpack_require__(9);
 
 
@@ -1040,7 +1146,7 @@ var getUserLists = function () {
 }();
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1063,15 +1169,13 @@ var Admin = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Admin', admi
 /* harmony default export */ __webpack_exports__["a"] = (Admin);
 
 /***/ }),
-/* 27 */,
-/* 28 */,
-/* 29 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(29);
 
 
 
@@ -1083,7 +1187,7 @@ router.post('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* category */].
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1092,7 +1196,7 @@ router.post('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* category */].
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models__ = __webpack_require__(30);
 
 
 
@@ -1229,7 +1333,7 @@ var INITCATEGORY = [{
 }];
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

@@ -34,3 +34,8 @@ export const getCategory = () => {
 export const addCategory = (data) => {
   return http.post('/category', data);
 };
+
+// 添加商品
+export const addProducts = (data) => {
+  return http.post('/products', data);
+};
