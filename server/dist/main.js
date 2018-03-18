@@ -179,7 +179,7 @@ var User = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('User', userSc
 
 
 
-var types = ['user_id', 'product_id'];
+var types = ['user_id', 'product_id', 'pic_id'];
 var idsSchema = new __WEBPACK_IMPORTED_MODULE_2_mongoose___default.a.Schema({
   // order_id: Number,
   // address_id: Number,
@@ -190,7 +190,8 @@ var idsSchema = new __WEBPACK_IMPORTED_MODULE_2_mongoose___default.a.Schema({
   // sku_id: Number,
   // admin_id: Number,
   user_id: Number,
-  product_id: Number
+  product_id: Number,
+  pic_id: Number
 });
 
 var Ids = __WEBPACK_IMPORTED_MODULE_2_mongoose___default.a.model('Ids', idsSchema);
@@ -199,7 +200,8 @@ Ids.findOne(function (err, data) {
   if (!data) {
     var newIds = new Ids({
       user_id: 0,
-      product_id: 0
+      product_id: 0,
+      pic_id: 0
     });
     newIds.save();
   }
@@ -360,8 +362,8 @@ module.exports = require("chalk");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users_routes__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__products_routes__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__admin_index__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__category_routes__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__admin_index__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__category_routes__ = __webpack_require__(31);
 
 
 
@@ -624,6 +626,7 @@ var router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
 
 router.get('/:category', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* products */].get);
 router.post('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* products */].post);
+router.post('/img', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* products */].postImg);
 
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
@@ -633,14 +636,104 @@ router.post('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* products */].
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return products; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_formidable__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_formidable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_formidable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_ids__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_formidable__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_formidable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_formidable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_path__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_path___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_path__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_fs__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_fs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_fs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_ids__ = __webpack_require__(10);
+
+
+
+
+var getPicUrl = function () {
+  var _ref = __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.mark(function _callee5(req) {
+    var _this4 = this;
+
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            return _context5.abrupt('return', new __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default.a(function (resolve, reject) {
+              var form = new __WEBPACK_IMPORTED_MODULE_4_formidable___default.a.IncomingForm();
+              form.uploadDir = './server/public/imgs/';
+              form.keepExtensions = true;
+              form.parse(req, function () {
+                var _ref2 = __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.mark(function _callee4(err, fields, files) {
+                  var id, picName, fullName, newPath;
+                  return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+                    while (1) {
+                      switch (_context4.prev = _context4.next) {
+                        case 0:
+                          _context4.next = 2;
+                          return Object(__WEBPACK_IMPORTED_MODULE_7__utils_ids__["a" /* getId */])('pic_id');
+
+                        case 2:
+                          id = _context4.sent;
+                          picName = (new Date().getTime() + Math.ceil(Math.random() * 10000)).toString(16) + id;
+                          fullName = picName + __WEBPACK_IMPORTED_MODULE_5_path___default.a.extname(files.file.name);
+                          newPath = './server/public/imgs/' + fullName;
+                          _context4.prev = 6;
+                          _context4.next = 9;
+                          return __WEBPACK_IMPORTED_MODULE_6_fs___default.a.rename(files.file.path, newPath);
+
+                        case 9:
+                          // gm(newPath)
+                          // .resize(200, 200, '!')
+                          // .write(newPath, async (err) => {
+                          //   if (err) {
+                          //     console.log('裁剪图片失败');
+                          //     reject(err);
+                          //   }
+                          //   resolve(fullName);
+                          // });
+                          resolve(fullName);
+                          _context4.next = 17;
+                          break;
+
+                        case 12:
+                          _context4.prev = 12;
+                          _context4.t0 = _context4['catch'](6);
+
+                          console.log('保存图片失败', _context4.t0);
+                          __WEBPACK_IMPORTED_MODULE_6_fs___default.a.unlink(files.file.path);
+                          reject(_context4.t0);
+
+                        case 17:
+                        case 'end':
+                          return _context4.stop();
+                      }
+                    }
+                  }, _callee4, _this4, [[6, 12]]);
+                }));
+
+                return function (_x2, _x3, _x4) {
+                  return _ref2.apply(this, arguments);
+                };
+              }());
+            }));
+
+          case 1:
+          case 'end':
+            return _context5.stop();
+        }
+      }
+    }, _callee5, this);
+  }));
+
+  return function getPicUrl(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
 
 
 
@@ -651,9 +744,9 @@ var products = {
   get: function get(req, res) {
     var _this = this;
 
-    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+    return __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.mark(function _callee() {
       var category;
-      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+      return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
@@ -680,17 +773,17 @@ var products = {
   post: function post(req, res) {
     var _this2 = this;
 
-    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-      var _req$body, name, desc, category, specs, id, monthsales, newProduct, productsSpecs, product;
+    return __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.mark(function _callee2() {
+      var _req$body, name, desc, category, specs, picList, id, monthsales, newProduct, productsSpecs, product;
 
-      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+      return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.prev = 0;
-              _req$body = req.body, name = _req$body.name, desc = _req$body.desc, category = _req$body.category, specs = _req$body.specs;
+              _req$body = req.body, name = _req$body.name, desc = _req$body.desc, category = _req$body.category, specs = _req$body.specs, picList = _req$body.picList;
               _context2.next = 4;
-              return Object(__WEBPACK_IMPORTED_MODULE_4__utils_ids__["a" /* getId */])('product_id');
+              return Object(__WEBPACK_IMPORTED_MODULE_7__utils_ids__["a" /* getId */])('product_id');
 
             case 4:
               id = _context2.sent;
@@ -700,6 +793,7 @@ var products = {
                 name: name,
                 desc: desc,
                 category: category,
+                pic_list: picList,
                 month_sales: monthsales,
                 specs: [],
                 comments: []
@@ -718,7 +812,7 @@ var products = {
               newProduct.specs = productsSpecs;
               _context2.prev = 10;
               _context2.next = 13;
-              return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].create(newProduct);
+              return __WEBPACK_IMPORTED_MODULE_3__models__["a" /* default */].create(newProduct);
 
             case 13:
               product = _context2.sent;
@@ -760,6 +854,47 @@ var products = {
           }
         }
       }, _callee2, _this2, [[0, 25], [10, 19]]);
+    }))();
+  },
+  postImg: function postImg(req, res) {
+    var _this3 = this;
+
+    return __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.mark(function _callee3() {
+      var picUrl;
+      return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              _context3.next = 3;
+              return getPicUrl(req);
+
+            case 3:
+              picUrl = _context3.sent;
+
+              res.status(200).json({
+                status: 200,
+                message: '上传成功',
+                picUrl: picUrl
+              });
+              _context3.next = 11;
+              break;
+
+            case 7:
+              _context3.prev = 7;
+              _context3.t0 = _context3['catch'](0);
+
+              console.log('上传图片失败', _context3.t0);
+              res.status(1).json({
+                message: '上传图片失败'
+              });
+
+            case 11:
+            case 'end':
+              return _context3.stop();
+          }
+        }
+      }, _callee3, _this3, [[0, 7]]);
     }))();
   }
 };
@@ -804,6 +939,12 @@ var recommends = [{
 
 /***/ }),
 /* 22 */
+/***/ (function(module, exports) {
+
+module.exports = require("babel-runtime/core-js/promise");
+
+/***/ }),
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -813,7 +954,7 @@ var recommends = [{
 
 var productsSchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema({
   id: Number,
-  pic_url: [String],
+  pic_list: [String],
   name: String,
   desc: String,
   category: String,
@@ -832,19 +973,31 @@ var Products = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Products'
 /* harmony default export */ __webpack_exports__["a"] = (Products);
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = require("formidable");
 
 /***/ }),
-/* 24 */
+/* 25 */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports) {
+
+module.exports = require("fs");
+
+/***/ }),
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users_routes__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users_routes__ = __webpack_require__(28);
 
 
 
@@ -855,13 +1008,13 @@ router.use('/user', __WEBPACK_IMPORTED_MODULE_1__users_routes__["a" /* default *
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
-/* 25 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(29);
 
 
 
@@ -876,7 +1029,7 @@ router.get('/lists', __WEBPACK_IMPORTED_MODULE_1__controllers__["b" /* getUserLi
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
-/* 26 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -896,7 +1049,7 @@ router.get('/lists', __WEBPACK_IMPORTED_MODULE_1__controllers__["b" /* getUserLi
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_time_formater__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_index__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__users_models__ = __webpack_require__(9);
 
 
@@ -1146,7 +1299,7 @@ var getUserLists = function () {
 }();
 
 /***/ }),
-/* 27 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1169,13 +1322,13 @@ var Admin = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Admin', admi
 /* harmony default export */ __webpack_exports__["a"] = (Admin);
 
 /***/ }),
-/* 28 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(32);
 
 
 
@@ -1187,7 +1340,7 @@ router.post('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* category */].
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
-/* 29 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1196,7 +1349,7 @@ router.post('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* category */].
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models__ = __webpack_require__(33);
 
 
 
@@ -1333,7 +1486,7 @@ var INITCATEGORY = [{
 }];
 
 /***/ }),
-/* 30 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

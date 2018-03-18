@@ -7,6 +7,7 @@ yarn-error.log*
 /test/unit/coverage/
 db
 /server/dist/
+/server/public/
 
 # Editor directories and files
 .idea

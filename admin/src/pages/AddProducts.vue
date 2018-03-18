@@ -51,15 +51,18 @@
             <el-input v-model="productsForm.desc"></el-input>
           </el-form-item>
           <el-form-item label="上传商品图片">
-            <!-- <el-upload
+            <el-upload
               class="avatar-uploader"
-              :action="baseUrl + '/v1/addimg/products'"
-              :show-file-list="false"
-              :on-success="uploadImg"
-              :before-upload="beforeImgUpload">
-              <img v-if="productsForm.image_path" :src="baseImgPath + productsForm.image_path" class="avatar">
-              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-            </el-upload> -->
+              :action="baseURL + '/api/products/img'"
+              :on-success="handleImgSuccess"
+              :before-upload="beforeImgUpload"
+              :file-list = "productsForm.picList"
+              list-type="picture"
+              :limit="5"
+            >
+              <i class="el-icon-plus avatar-uploader-icon"></i>
+              <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过2MB</div>
+            </el-upload>
           </el-form-item>
           <el-form-item label="商品规格">
               <el-radio class="radio" v-model="productsSpecs" label="one">单规格</el-radio>
@@ -93,7 +96,7 @@
                 label="价格"
               ></el-table-column>
               <el-table-column label="操作">
-                <template slot-scope> 
+                <template slot-scope="scope"> 
                   <el-button
                     size="small"
                     type="danger"
@@ -118,7 +121,7 @@
               <el-input-number v-model="specsForm.packFee" :min="0" :max="100"></el-input-number>
             </el-form-item>
             <el-form-item label="价格" label-width="100px">
-              <el-input-number v-model="specsForm.price" :min="0" :max="10000"></el-input-number>
+              <el-input-number v-model="specsForm.price" :min="0" :max="100000"></el-input-number>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -133,11 +136,13 @@
 
 <script>
 import Header from '@/components/header';
-import {getCategory, addCategory, addProducts} from '@/service/api';
-// import {baseUrl, baseImgPath} from '@/config/env'
+import { getCategory, addCategory, addProducts } from '@/service/api';
+import { baseURL, imgURL } from '@/service/url';
 export default {
   data () {
     return {
+      baseURL,
+      imgURL,
       categoryForm: {
         categoryList: [],
         categorySelect: '',
@@ -147,14 +152,15 @@ export default {
       productsForm: {
         name: '',
         desc: '',
+        picList: [],
         specs: [{
-          specs: '',
+          specs: '默认',
           packFee: 0,
           price: 0
         }]
       },
       specsForm: {
-        specs: '',
+        specs: '默认',
         packFee: 0,
         price: 0
       },
@@ -261,6 +267,16 @@ export default {
                 type: 'success',
                 message: '添加成功'
               });
+              // this.productsForm = {
+              //   name: '',
+              //   desc: '',
+              //   picList: [],
+              //   specs: [{
+              //     specs: '默认',
+              //     packFee: 0,
+              //     price: 0
+              //   }]
+              // };
             } else {
               this.$message.error('添加失败');
             }
@@ -276,6 +292,28 @@ export default {
           return false;
         }
       });
+    },
+    handleImgSuccess (res) {
+      if (res.status === 200) {
+        this.productsForm.picList.push(res.picUrl);
+        this.$message({
+          type: 'success',
+          message: res.message
+        });
+      } else {
+        this.$message.error(res.message);
+      }
+    },
+    beforeImgUpload (file) {
+      const isRightType = (file.type === 'image/jpeg') || (file.type === 'image/png');
+      const isLt2M = (file.size / 1024 / 1024) < 2;
+      if (!isRightType) {
+        this.$message.error('上传只能是 jpeg/png!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传图片大小不能超过 2MB!');
+      }
+      return isRightType && isLt2M;
     }
   }
 };

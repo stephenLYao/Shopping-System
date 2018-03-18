@@ -5,5 +5,6 @@ const router = Router();
 
 router.get('/:category', products.get);
 router.post('/', products.post);
+router.post('/img', products.postImg);
 
 export default router;
