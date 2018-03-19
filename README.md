@@ -11,7 +11,7 @@ $ npm install or yarn install
 #### Start DB
 
 ```
-$ npm install or yarn install
+$ npm run start-db
 ```
 
 #### Start Server
