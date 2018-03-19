@@ -111,47 +111,45 @@ async function getPicUrl (req) {
     });
   });
 }
+
+export async function getProductsAllCounts (req, res) {
+  try {
+    const counts = await Products.count();
+    res.status(200).json({
+      counts,
+      message: '获取商品列表数量成功'
+    });
+  } catch (error) {
+    res.status(1).json({
+      message: '获取商品列表数量失败'
+    });
+  }
+}
+
+export async function getProductsList (req, res) {
+  const { offset = 0, limit = 20 } = req.query;
+  let products = [];
+  try {
+    if (req.query.category) {
+      products = await Products.find({ category: req.query.category }).sort({id: -1}).limit(Number(limit)).skip(Number(offset));
+    } else {
+      products = await Products.find({}).sort({id: -1}).limit(Number(limit)).skip(Number(offset));
+    }
+    res.status(200).json({
+      products,
+      message: '获取用户列表成功'
+    });
+  } catch (error) {
+    res.status(1).json({
+      message: '获取用户列表失败'
+    });
+  }
+};
+
 var recommends = [
   {
     id: 1,
     picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
-    desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
-    price: 8688,
-    tag: 'appliances'
-  },
-  {
-    id: 1,
-    picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
-    desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
-    price: 8688,
-    tag: 'appliances'
-  },
-  {
-    id: 1,
-    picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
-    desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
-    price: 8688,
-    tag: 'appliances'
-  },
-  {
-    id: 1,
-    picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
-    desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
-    price: 8688,
-    tag: 'appliances'
-  },
-  {
-    id: 1,
-    picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
-    desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
-    price: 8688,
-    tag: 'appliances'
-  },
-  {
-    id: 1,
-    picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
-    desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
-    price: 8688,
-    tag: 'appliances'
+    desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量'
   }
 ];

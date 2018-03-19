@@ -39,3 +39,13 @@ export const addCategory = (data) => {
 export const addProducts = (data) => {
   return http.post('/products', data);
 };
+
+// 获取商品总量
+export const getProductsAllCounts = () => {
+  return http.get('/products/counts');
+};
+
+// 获取商品列表
+export const getProductsList = (data) => {
+  return http.get('/products/lists?' + data);
+};

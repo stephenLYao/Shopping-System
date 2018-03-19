@@ -624,9 +624,11 @@ module.exports = require("crypto");
 
 var router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
 
-router.get('/:category', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* products */].get);
-router.post('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* products */].post);
-router.post('/img', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* products */].postImg);
+router.get('/counts', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* getProductsAllCounts */]);
+router.get('/lists', __WEBPACK_IMPORTED_MODULE_1__controllers__["b" /* getProductsList */]);
+router.get('/:category', __WEBPACK_IMPORTED_MODULE_1__controllers__["c" /* products */].get);
+router.post('/img', __WEBPACK_IMPORTED_MODULE_1__controllers__["c" /* products */].postImg);
+router.post('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["c" /* products */].post);
 
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
@@ -635,7 +637,9 @@ router.post('/img', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* products *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return products; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return products; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getProductsAllCounts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getProductsList; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__ = __webpack_require__(2);
@@ -899,42 +903,113 @@ var products = {
   }
 };
 
+var getProductsAllCounts = function () {
+  var _ref3 = __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.mark(function _callee6(req, res) {
+    var counts;
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            _context6.prev = 0;
+            _context6.next = 3;
+            return __WEBPACK_IMPORTED_MODULE_3__models__["a" /* default */].count();
+
+          case 3:
+            counts = _context6.sent;
+
+            res.status(200).json({
+              counts: counts,
+              message: '获取商品列表数量成功'
+            });
+            _context6.next = 10;
+            break;
+
+          case 7:
+            _context6.prev = 7;
+            _context6.t0 = _context6['catch'](0);
+
+            res.status(1).json({
+              message: '获取商品列表数量失败'
+            });
+
+          case 10:
+          case 'end':
+            return _context6.stop();
+        }
+      }
+    }, _callee6, this, [[0, 7]]);
+  }));
+
+  return function getProductsAllCounts(_x5, _x6) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+var getProductsList = function () {
+  var _ref4 = __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.mark(function _callee7(req, res) {
+    var _req$query, _req$query$offset, offset, _req$query$limit, limit, products;
+
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.wrap(function _callee7$(_context7) {
+      while (1) {
+        switch (_context7.prev = _context7.next) {
+          case 0:
+            _req$query = req.query, _req$query$offset = _req$query.offset, offset = _req$query$offset === undefined ? 0 : _req$query$offset, _req$query$limit = _req$query.limit, limit = _req$query$limit === undefined ? 20 : _req$query$limit;
+            products = [];
+            _context7.prev = 2;
+
+            if (!req.query.category) {
+              _context7.next = 9;
+              break;
+            }
+
+            _context7.next = 6;
+            return __WEBPACK_IMPORTED_MODULE_3__models__["a" /* default */].find({ category: req.query.category }).sort({ id: -1 }).limit(Number(limit)).skip(Number(offset));
+
+          case 6:
+            products = _context7.sent;
+            _context7.next = 12;
+            break;
+
+          case 9:
+            _context7.next = 11;
+            return __WEBPACK_IMPORTED_MODULE_3__models__["a" /* default */].find({}).sort({ id: -1 }).limit(Number(limit)).skip(Number(offset));
+
+          case 11:
+            products = _context7.sent;
+
+          case 12:
+            res.status(200).json({
+              products: products,
+              message: '获取用户列表成功'
+            });
+            _context7.next = 18;
+            break;
+
+          case 15:
+            _context7.prev = 15;
+            _context7.t0 = _context7['catch'](2);
+
+            res.status(1).json({
+              message: '获取用户列表失败'
+            });
+
+          case 18:
+          case 'end':
+            return _context7.stop();
+        }
+      }
+    }, _callee7, this, [[2, 15]]);
+  }));
+
+  return function getProductsList(_x7, _x8) {
+    return _ref4.apply(this, arguments);
+  };
+}();;
+
 var recommends = [{
   id: 1,
   picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
-  desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
-  price: 8688,
-  tag: 'appliances'
-}, {
-  id: 1,
-  picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
-  desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
-  price: 8688,
-  tag: 'appliances'
-}, {
-  id: 1,
-  picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
-  desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
-  price: 8688,
-  tag: 'appliances'
-}, {
-  id: 1,
-  picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
-  desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
-  price: 8688,
-  tag: 'appliances'
-}, {
-  id: 1,
-  picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
-  desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
-  price: 8688,
-  tag: 'appliances'
-}, {
-  id: 1,
-  picUrl: 'http://p4zxobaq9.bkt.clouddn.com/mac.jpg',
-  desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量',
-  price: 8688,
-  tag: 'appliances'
+  desc: 'Apple/苹果 21.5 英寸 iMac 2.3GHz 处理器 1TB 存储容量'
 }];
 
 /***/ }),
