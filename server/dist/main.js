@@ -362,7 +362,7 @@ module.exports = require("chalk");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users_routes__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__products_routes__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__admin_index__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__admin_routes__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__category_routes__ = __webpack_require__(31);
 
 
@@ -375,8 +375,7 @@ var router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
 router.use('/users', __WEBPACK_IMPORTED_MODULE_1__users_routes__["a" /* default */]);
 router.use('/products', __WEBPACK_IMPORTED_MODULE_2__products_routes__["a" /* default */]);
 router.use('/category', __WEBPACK_IMPORTED_MODULE_4__category_routes__["a" /* default */]);
-
-router.use('/admin', __WEBPACK_IMPORTED_MODULE_3__admin_index__["a" /* default */]);
+router.use('/admin', __WEBPACK_IMPORTED_MODULE_3__admin_routes__["a" /* default */]);
 
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
@@ -393,9 +392,11 @@ router.use('/admin', __WEBPACK_IMPORTED_MODULE_3__admin_index__["a" /* default *
 
 var router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
 
-router.post('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* index */].post);
-router.post('/log-in', __WEBPACK_IMPORTED_MODULE_1__controllers__["b" /* logIn */].post);
-router.post('/log-out', __WEBPACK_IMPORTED_MODULE_1__controllers__["c" /* logOut */].post);
+router.post('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["c" /* index */].post);
+router.post('/log-in', __WEBPACK_IMPORTED_MODULE_1__controllers__["d" /* logIn */].post);
+router.post('/log-out', __WEBPACK_IMPORTED_MODULE_1__controllers__["e" /* logOut */].post);
+router.get('/counts', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* getUserCounts */]);
+router.get('/lists', __WEBPACK_IMPORTED_MODULE_1__controllers__["b" /* getUserLists */]);
 
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
@@ -404,9 +405,11 @@ router.post('/log-out', __WEBPACK_IMPORTED_MODULE_1__controllers__["c" /* logOut
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return index; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return logIn; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return logOut; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return index; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return logIn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return logOut; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getUserCounts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getUserLists; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
@@ -604,6 +607,90 @@ var logOut = {
     }))();
   }
 };
+
+var getUserCounts = function () {
+  var _ref = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(req, res) {
+    var count;
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.prev = 0;
+            _context4.next = 3;
+            return __WEBPACK_IMPORTED_MODULE_6__models__["a" /* default */].count();
+
+          case 3:
+            count = _context4.sent;
+
+            res.status(200).json({
+              count: count
+            });
+            _context4.next = 10;
+            break;
+
+          case 7:
+            _context4.prev = 7;
+            _context4.t0 = _context4['catch'](0);
+
+            res.status(503).json({
+              message: '获取用户数量失败'
+            });
+
+          case 10:
+          case 'end':
+            return _context4.stop();
+        }
+      }
+    }, _callee4, this, [[0, 7]]);
+  }));
+
+  return function getUserCounts(_x, _x2) {
+    return _ref.apply(this, arguments);
+  };
+}();;
+
+var getUserLists = function () {
+  var _ref2 = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee5(req, res) {
+    var _req$query, _req$query$offset, offset, _req$query$limit, limit, users;
+
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            _req$query = req.query, _req$query$offset = _req$query.offset, offset = _req$query$offset === undefined ? 0 : _req$query$offset, _req$query$limit = _req$query.limit, limit = _req$query$limit === undefined ? 20 : _req$query$limit;
+            _context5.prev = 1;
+            _context5.next = 4;
+            return __WEBPACK_IMPORTED_MODULE_6__models__["a" /* default */].find({}).sort({ id: -1 }).limit(Number(limit)).skip(Number(offset));
+
+          case 4:
+            users = _context5.sent;
+
+            res.status(200).json({
+              users: users
+            });
+            _context5.next = 11;
+            break;
+
+          case 8:
+            _context5.prev = 8;
+            _context5.t0 = _context5['catch'](1);
+
+            res.status(503).json({
+              message: '获取用户列表失败'
+            });
+
+          case 11:
+          case 'end':
+            return _context5.stop();
+        }
+      }
+    }, _callee5, this, [[1, 8]]);
+  }));
+
+  return function getUserLists(_x3, _x4) {
+    return _ref2.apply(this, arguments);
+  };
+}();;
 
 /***/ }),
 /* 19 */
@@ -1066,337 +1153,10 @@ module.exports = require("path");
 module.exports = require("fs");
 
 /***/ }),
-/* 27 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users_routes__ = __webpack_require__(28);
-
-
-
-var router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
-
-router.use('/user', __WEBPACK_IMPORTED_MODULE_1__users_routes__["a" /* default */]);
-
-/* harmony default export */ __webpack_exports__["a"] = (router);
-
-/***/ }),
-/* 28 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(29);
-
-
-
-var router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
-
-router.post('/login', __WEBPACK_IMPORTED_MODULE_1__controllers__["c" /* logIn */].post);
-router.post('/logout', __WEBPACK_IMPORTED_MODULE_1__controllers__["d" /* logOut */].post);
-
-router.get('/counts', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* getUserCounts */]);
-router.get('/lists', __WEBPACK_IMPORTED_MODULE_1__controllers__["b" /* getUserLists */]);
-
-/* harmony default export */ __webpack_exports__["a"] = (router);
-
-/***/ }),
-/* 29 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export register */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return logIn; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return logOut; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getUserCounts; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getUserLists; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_bcryptjs__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_bcryptjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_bcryptjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jsonwebtoken__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jsonwebtoken___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jsonwebtoken__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_time_formater__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_index__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__users_models__ = __webpack_require__(9);
-
-
-
-
-
-
-
-
-// import config from '../../config/default';
-
-var register = {
-  post: function post(req, res) {
-    var _this = this;
-
-    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-      var _req$body, username, password, createAt, newPassword, newUser, savedUser;
-
-      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.prev = 0;
-              _req$body = req.body, username = _req$body.username, password = _req$body.password;
-              createAt = __WEBPACK_IMPORTED_MODULE_4_time_formater___default()().format('YYYY-MM-DD HH:mm');
-              _context.next = 5;
-              return __WEBPACK_IMPORTED_MODULE_2_bcryptjs___default.a.hash(password, 10);
-
-            case 5:
-              newPassword = _context.sent;
-              newUser = new __WEBPACK_IMPORTED_MODULE_6__models__["a" /* default */]({ username: username, newPassword: newPassword, createAt: createAt });
-              _context.next = 9;
-              return newUser.save();
-
-            case 9:
-              savedUser = _context.sent;
-
-              console.log('用户注册成功');
-              res.status(200).json({
-                message: 'Thanks for signing up, ' + savedUser.username + '!'
-              });
-              _context.next = 18;
-              break;
-
-            case 14:
-              _context.prev = 14;
-              _context.t0 = _context['catch'](0);
-
-              console.error('用户注册失败');
-              res.status(400).json({
-                message: '注册失败'
-              });
-
-            case 18:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, _this, [[0, 14]]);
-    }))();
-  }
-};
-
-var logIn = {
-  post: function post(req, res) {
-    var _this2 = this;
-
-    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-      var _req$body2, username, password, user, passwordHash, matched;
-
-      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.prev = 0;
-              _req$body2 = req.body, username = _req$body2.username, password = _req$body2.password;
-              _context2.next = 4;
-              return __WEBPACK_IMPORTED_MODULE_6__models__["a" /* default */].findOne({ username: username });
-
-            case 4:
-              user = _context2.sent;
-
-              console.log(user);
-
-              if (!user) {
-                _context2.next = 14;
-                break;
-              }
-
-              passwordHash = user.password;
-              _context2.next = 10;
-              return __WEBPACK_IMPORTED_MODULE_2_bcryptjs___default.a.compare(password, passwordHash);
-
-            case 10:
-              matched = _context2.sent;
-
-              if (matched) {
-                res.status(200).json({
-                  message: '登录成功',
-                  user: user
-                });
-              } else {
-                res.status(401).json({
-                  message: '用户名或者密码不正确'
-                });
-              }
-              _context2.next = 15;
-              break;
-
-            case 14:
-              res.status(401).json({
-                message: '用户名不存在'
-              });
-
-            case 15:
-              _context2.next = 21;
-              break;
-
-            case 17:
-              _context2.prev = 17;
-              _context2.t0 = _context2['catch'](0);
-
-              console.error('用户登录失败');
-              res.status(400).json({
-                message: '登录失败'
-              });
-
-            case 21:
-            case 'end':
-              return _context2.stop();
-          }
-        }
-      }, _callee2, _this2, [[0, 17]]);
-    }))();
-  }
-};
-
-var logOut = {
-  post: function post(req, res) {
-    var _this3 = this;
-
-    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
-      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              try {
-                res.status(200).json({
-                  message: 'Sign out successful. Good bye! :)'
-                });
-              } catch (error) {
-                console.error(error);
-              }
-
-            case 1:
-            case 'end':
-              return _context3.stop();
-          }
-        }
-      }, _callee3, _this3);
-    }))();
-  }
-};
-
-var getUserCounts = function () {
-  var _ref = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(req, res) {
-    var count;
-    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
-      while (1) {
-        switch (_context4.prev = _context4.next) {
-          case 0:
-            _context4.prev = 0;
-            _context4.next = 3;
-            return __WEBPACK_IMPORTED_MODULE_7__users_models__["a" /* default */].count();
-
-          case 3:
-            count = _context4.sent;
-
-            res.status(200).json({
-              count: count
-            });
-            _context4.next = 10;
-            break;
-
-          case 7:
-            _context4.prev = 7;
-            _context4.t0 = _context4['catch'](0);
-
-            res.status(503).json({
-              message: '获取用户数量失败'
-            });
-
-          case 10:
-          case 'end':
-            return _context4.stop();
-        }
-      }
-    }, _callee4, this, [[0, 7]]);
-  }));
-
-  return function getUserCounts(_x, _x2) {
-    return _ref.apply(this, arguments);
-  };
-}();
-
-var getUserLists = function () {
-  var _ref2 = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee5(req, res) {
-    var _req$query, _req$query$offset, offset, _req$query$limit, limit, users;
-
-    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
-      while (1) {
-        switch (_context5.prev = _context5.next) {
-          case 0:
-            _req$query = req.query, _req$query$offset = _req$query.offset, offset = _req$query$offset === undefined ? 0 : _req$query$offset, _req$query$limit = _req$query.limit, limit = _req$query$limit === undefined ? 20 : _req$query$limit;
-            _context5.prev = 1;
-            _context5.next = 4;
-            return __WEBPACK_IMPORTED_MODULE_7__users_models__["a" /* default */].find({}).sort({ user_id: -1 }).limit(Number(limit)).skip(Number(offset));
-
-          case 4:
-            users = _context5.sent;
-
-            res.status(200).json({
-              users: users
-            });
-            _context5.next = 11;
-            break;
-
-          case 8:
-            _context5.prev = 8;
-            _context5.t0 = _context5['catch'](1);
-
-            res.status(503).json({
-              message: '获取用户列表失败'
-            });
-
-          case 11:
-          case 'end':
-            return _context5.stop();
-        }
-      }
-    }, _callee5, this, [[1, 8]]);
-  }));
-
-  return function getUserLists(_x3, _x4) {
-    return _ref2.apply(this, arguments);
-  };
-}();
-
-/***/ }),
-/* 30 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-
-
-var Schema = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema;
-
-var adminSchema = new Schema({
-  id: Number,
-  username: String,
-  password: String,
-  createAt: String,
-  avatar: String
-});
-
-var Admin = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Admin', adminSchema);
-
-/* harmony default export */ __webpack_exports__["a"] = (Admin);
-
-/***/ }),
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */,
 /* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1577,6 +1337,229 @@ var categorySchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema
 var Category = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Category', categorySchema);
 
 /* harmony default export */ __webpack_exports__["a"] = (Category);
+
+/***/ }),
+/* 34 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(35);
+
+
+
+var router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
+
+router.post('/login', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* logIn */].post);
+router.post('/logout', __WEBPACK_IMPORTED_MODULE_1__controllers__["b" /* logOut */].post);
+
+/* harmony default export */ __webpack_exports__["a"] = (router);
+
+/***/ }),
+/* 35 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export register */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return logIn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return logOut; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_bcryptjs__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_bcryptjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_bcryptjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jsonwebtoken__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jsonwebtoken___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jsonwebtoken__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_time_formater__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_index__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models__ = __webpack_require__(36);
+
+
+
+
+
+
+
+// import config from '../../config/default';
+
+var register = {
+  post: function post(req, res) {
+    var _this = this;
+
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+      var _req$body, username, password, createAt, newPassword, newUser, savedUser;
+
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _req$body = req.body, username = _req$body.username, password = _req$body.password;
+              createAt = __WEBPACK_IMPORTED_MODULE_4_time_formater___default()().format('YYYY-MM-DD HH:mm');
+              _context.next = 5;
+              return __WEBPACK_IMPORTED_MODULE_2_bcryptjs___default.a.hash(password, 10);
+
+            case 5:
+              newPassword = _context.sent;
+              newUser = new __WEBPACK_IMPORTED_MODULE_6__models__["a" /* default */]({ username: username, newPassword: newPassword, createAt: createAt });
+              _context.next = 9;
+              return newUser.save();
+
+            case 9:
+              savedUser = _context.sent;
+
+              console.log('用户注册成功');
+              res.status(200).json({
+                message: 'Thanks for signing up, ' + savedUser.username + '!'
+              });
+              _context.next = 18;
+              break;
+
+            case 14:
+              _context.prev = 14;
+              _context.t0 = _context['catch'](0);
+
+              console.error('用户注册失败');
+              res.status(400).json({
+                message: '注册失败'
+              });
+
+            case 18:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, _this, [[0, 14]]);
+    }))();
+  }
+};
+
+var logIn = {
+  post: function post(req, res) {
+    var _this2 = this;
+
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+      var _req$body2, username, password, user, passwordHash, matched;
+
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _req$body2 = req.body, username = _req$body2.username, password = _req$body2.password;
+              _context2.next = 4;
+              return __WEBPACK_IMPORTED_MODULE_6__models__["a" /* default */].findOne({ username: username });
+
+            case 4:
+              user = _context2.sent;
+
+              console.log(user);
+
+              if (!user) {
+                _context2.next = 14;
+                break;
+              }
+
+              passwordHash = user.password;
+              _context2.next = 10;
+              return __WEBPACK_IMPORTED_MODULE_2_bcryptjs___default.a.compare(password, passwordHash);
+
+            case 10:
+              matched = _context2.sent;
+
+              if (matched) {
+                res.status(200).json({
+                  message: '登录成功',
+                  user: user
+                });
+              } else {
+                res.status(401).json({
+                  message: '用户名或者密码不正确'
+                });
+              }
+              _context2.next = 15;
+              break;
+
+            case 14:
+              res.status(401).json({
+                message: '用户名不存在'
+              });
+
+            case 15:
+              _context2.next = 21;
+              break;
+
+            case 17:
+              _context2.prev = 17;
+              _context2.t0 = _context2['catch'](0);
+
+              console.error('用户登录失败');
+              res.status(400).json({
+                message: '登录失败'
+              });
+
+            case 21:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, _this2, [[0, 17]]);
+    }))();
+  }
+};
+
+var logOut = {
+  post: function post(req, res) {
+    var _this3 = this;
+
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              try {
+                res.status(200).json({
+                  message: 'Sign out successful. Good bye! :)'
+                });
+              } catch (error) {
+                console.error(error);
+              }
+
+            case 1:
+            case 'end':
+              return _context3.stop();
+          }
+        }
+      }, _callee3, _this3);
+    }))();
+  }
+};
+
+/***/ }),
+/* 36 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
+
+
+var Schema = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema;
+
+var adminSchema = new Schema({
+  id: Number,
+  username: String,
+  password: String,
+  createAt: String,
+  avatar: String
+});
+
+var Admin = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Admin', adminSchema);
+
+/* harmony default export */ __webpack_exports__["a"] = (Admin);
 
 /***/ })
 /******/ ]);

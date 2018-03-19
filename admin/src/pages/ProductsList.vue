@@ -17,10 +17,10 @@
             <el-form-item label="商品 ID">
               <span>{{ props.row.id }}</span>
             </el-form-item>
-            <el-form-item label="食品介绍">
+            <el-form-item label="商品介绍">
               <span>{{ props.row.desc }}</span>
             </el-form-item>
-            <el-form-item label="食品分类">
+            <el-form-item label="商品分类">
               <span>{{ props.row.category }}</span>
             </el-form-item>
             <el-form-item label="月销量">
@@ -30,11 +30,11 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="食品名称"
+        label="商品名称"
         prop="name">
       </el-table-column>
       <el-table-column
-        label="食品介绍"
+        label="商品介绍"
         prop="desc">
       </el-table-column>
       <el-table-column label="操作" width="160">

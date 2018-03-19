@@ -1,9 +1,8 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dtime from 'time-formater';
-import { randId } from '../../../utils/index';
+import { randId } from '../../utils/index';
 import Admin from './models';
-import User from '../../users/models';
 // import config from '../../config/default';
 
 export const register = {
@@ -71,30 +70,3 @@ export const logOut = {
     }
   }
 };
-
-export async function getUserCounts (req, res) {
-  try {
-    const count = await User.count();
-    res.status(200).json({
-      count
-    });
-  } catch (error) {
-    res.status(503).json({
-      message: '获取用户数量失败'
-    });
-  }
-}
-
-export async function getUserLists (req, res) {
-  const { offset = 0, limit = 20 } = req.query;
-  try {
-    const users = await User.find({}).sort({user_id: -1}).limit(Number(limit)).skip(Number(offset));
-    res.status(200).json({
-      users
-    });
-  } catch (error) {
-    res.status(503).json({
-      message: '获取用户列表失败'
-    });
-  }
-}

@@ -79,3 +79,30 @@ export const logOut = {
     }
   }
 };
+
+export async function getUserCounts (req, res) {
+  try {
+    const count = await User.count();
+    res.status(200).json({
+      count
+    });
+  } catch (error) {
+    res.status(503).json({
+      message: '获取用户数量失败'
+    });
+  }
+};
+
+export async function getUserLists (req, res) {
+  const { offset = 0, limit = 20 } = req.query;
+  try {
+    const users = await User.find({}).sort({id: -1}).limit(Number(limit)).skip(Number(offset));
+    res.status(200).json({
+      users
+    });
+  } catch (error) {
+    res.status(503).json({
+      message: '获取用户列表失败'
+    });
+  }
+};
