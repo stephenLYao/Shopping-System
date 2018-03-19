@@ -713,7 +713,6 @@ var router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
 
 router.get('/counts', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* getProductsAllCounts */]);
 router.get('/lists', __WEBPACK_IMPORTED_MODULE_1__controllers__["b" /* getProductsList */]);
-router.get('/:category', __WEBPACK_IMPORTED_MODULE_1__controllers__["c" /* products */].get);
 router.post('/img', __WEBPACK_IMPORTED_MODULE_1__controllers__["c" /* products */].postImg);
 router.post('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["c" /* products */].post);
 
@@ -1034,7 +1033,7 @@ var getProductsAllCounts = function () {
 
 var getProductsList = function () {
   var _ref4 = __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.mark(function _callee7(req, res) {
-    var _req$query, _req$query$offset, offset, _req$query$limit, limit, products;
+    var _req$query, _req$query$offset, offset, _req$query$limit, limit, products, category;
 
     return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.wrap(function _callee7$(_context7) {
       while (1) {
@@ -1045,47 +1044,48 @@ var getProductsList = function () {
             _context7.prev = 2;
 
             if (!req.query.category) {
-              _context7.next = 9;
+              _context7.next = 10;
               break;
             }
 
-            _context7.next = 6;
-            return __WEBPACK_IMPORTED_MODULE_3__models__["a" /* default */].find({ category: req.query.category }).sort({ id: -1 }).limit(Number(limit)).skip(Number(offset));
+            category = decodeURIComponent(req.query.category);
+            _context7.next = 7;
+            return __WEBPACK_IMPORTED_MODULE_3__models__["a" /* default */].find({ category: category }).sort({ id: -1 }).limit(Number(limit)).skip(Number(offset));
 
-          case 6:
+          case 7:
             products = _context7.sent;
-            _context7.next = 12;
+            _context7.next = 13;
             break;
 
-          case 9:
-            _context7.next = 11;
+          case 10:
+            _context7.next = 12;
             return __WEBPACK_IMPORTED_MODULE_3__models__["a" /* default */].find({}).sort({ id: -1 }).limit(Number(limit)).skip(Number(offset));
 
-          case 11:
+          case 12:
             products = _context7.sent;
 
-          case 12:
+          case 13:
             res.status(200).json({
               products: products,
               message: '获取用户列表成功'
             });
-            _context7.next = 18;
+            _context7.next = 19;
             break;
 
-          case 15:
-            _context7.prev = 15;
+          case 16:
+            _context7.prev = 16;
             _context7.t0 = _context7['catch'](2);
 
             res.status(1).json({
               message: '获取用户列表失败'
             });
 
-          case 18:
+          case 19:
           case 'end':
             return _context7.stop();
         }
       }
-    }, _callee7, this, [[2, 15]]);
+    }, _callee7, this, [[2, 16]]);
   }));
 
   return function getProductsList(_x7, _x8) {
@@ -1215,6 +1215,7 @@ var category = {
               categories = _context.sent;
 
               res.status(200).json({
+                status: 200,
                 categories: categories
               });
               _context.next = 10;

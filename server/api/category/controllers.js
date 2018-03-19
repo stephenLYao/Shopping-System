@@ -13,6 +13,7 @@ export const category = {
         }
       });
       res.status(200).json({
+        status: 200,
         categories
       });
     } catch (error) {

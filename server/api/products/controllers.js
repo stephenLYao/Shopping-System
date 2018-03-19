@@ -131,7 +131,8 @@ export async function getProductsList (req, res) {
   let products = [];
   try {
     if (req.query.category) {
-      products = await Products.find({ category: req.query.category }).sort({id: -1}).limit(Number(limit)).skip(Number(offset));
+      const category = decodeURIComponent(req.query.category);
+      products = await Products.find({ category: category }).sort({id: -1}).limit(Number(limit)).skip(Number(offset));
     } else {
       products = await Products.find({}).sort({id: -1}).limit(Number(limit)).skip(Number(offset));
     }

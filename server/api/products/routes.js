@@ -5,7 +5,6 @@ const router = Router();
 
 router.get('/counts', getProductsAllCounts);
 router.get('/lists', getProductsList);
-router.get('/:category', products.get);
 router.post('/img', products.postImg);
 router.post('/', products.post);
 

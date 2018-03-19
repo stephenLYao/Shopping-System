@@ -52,31 +52,30 @@
       <v-btn icon to="/carts">
         <v-icon>shopping_cart</v-icon>
       </v-btn>
-      <v-tabs dark color="primary" show-arrows slot="extension" grow v-model="tabs">
-        <v-tab v-for="(category, index) in categories" :key="index" @click="getProducts(category.tag)" :tag="category.tag">
+      <v-tabs color="primary" show-arrows slot="extension" grow v-model="tabs">
+        <v-tab v-for="(category, index) in categories" :key="index" @click="getProducts(category.name)" :href="'#tab-' + index">
           {{ category.name }}
         </v-tab>
         <v-tabs-slider color="white"></v-tabs-slider>
       </v-tabs>
     </v-toolbar>
     <v-tabs-items v-model="tabs" style="margin-top: 110px;">
-      <v-tab-item v-for="(category, index) in categories" :key="index">
-        <List :lists="lists" :tag="tag"></List>
+      <v-tab-item v-for="(category, index) in categories" :key="index" :id="'tab-' + index">
+        <List :lists="lists" :category="category.name"></List>
       </v-tab-item>
     </v-tabs-items>   
   </div>
 </template>
 
 <script>
+import qs from 'qs';
 import { mapState } from 'vuex';
 import List from '@/components/list';
+import { getCategory, getProductsList } from '@/service/api';
 
 export default {
   data () {
     return {
-      tabs: null,
-      tag: '',
-      drawer: false,
       items1: [
         {
           title: '登录',
@@ -101,69 +100,59 @@ export default {
           to: ''
         }
       ],
-      categories: [
-        {
-          name: '推荐',
-          tag: 'recommends'
-        },
-        {
-          name: '服装',
-          tag: 'clothes'
-        },
-        {
-          name: '鞋靴',
-          tag: 'shoes'
-        },
-        {
-          name: '家电',
-          tag: 'appliances'
-        },
-        {
-          name: '运动',
-          tag: 'sports'
-        },
-        {
-          name: '美食',
-          tag: 'foods'
-        },
-        {
-          name: '家具',
-          tag: 'furnitures'
-        },
-        {
-          name: '汽车',
-          tag: 'cars'
-        }
-      ]
+      tabs: null,
+      drawer: false,
+      offset: 0,
+      limit: 10,
+      category: '',
+      categories: [],
+      lists: [],
     };
+  },
+  async created () {
+    try {
+      await this.getCategories();
+      await this.getProducts(this.categories[0].name);
+    } catch (error) {
+      throw Error(err);
+    }
+    
   },
   components: {
     List
   },
-  computed: {
-    ...mapState({
-      lists: state => state.products.lists
-    })
-  },
+
   methods: {
+    async getCategories () {
+      try {
+        const res = await getCategory();
+        if (res.status === 200) {
+          res.data.categories.forEach((item) => {
+            this.categories.push({
+              name: item.name,
+              tag: item.tag
+            });
+          });
+        }
+      } catch (error) {
+        throw Error(error);
+      }
+    },
+    async getProducts (name) {
+      try {
+        const res = await getProductsList(qs.stringify({ category: name, offset: this.offset, limit: this.limit }));
+        this.lists = res.data.products;
+      } catch (error) {
+        throw Error('获取列表错误');
+      }
+    },
     logOut () {
       this.$store.dispatch('logOut').then(() => {
         this.$router.push('/');
       }).catch((error) => {
         console.log(error);
       });
-    },
-    getProducts (tag) {
-      this.$store.state.products.lists = [];
-      this.$store.dispatch('getProducts', { tag }).then(() => {
-        console.log('Get Lists');
-      }).catch((error) => {
-        console.log(error);
-      });
     }
-  },
-  created () {
-    this.getProducts('recommends');
   }
 };
 </script>
