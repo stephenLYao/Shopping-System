@@ -53,25 +53,24 @@
         <v-icon>shopping_cart</v-icon>
       </v-btn>
       <v-tabs color="primary" show-arrows slot="extension" grow v-model="tabs">
-        <v-tab v-for="(category, index) in categories" :key="index" @click="getProducts(category.name)" :href="'#tab-' + index">
+        <v-tab v-for="(category, index) in categories" :key="index">
           {{ category.name }}
         </v-tab>
         <v-tabs-slider color="white"></v-tabs-slider>
       </v-tabs>
     </v-toolbar>
     <v-tabs-items v-model="tabs" style="margin-top: 110px;">
-      <v-tab-item v-for="(category, index) in categories" :key="index" :id="'tab-' + index">
-        <List :lists="lists" :category="category.name"></List>
+      <v-tab-item v-for="(category, index) in categories" :key="index">
+        <List :category="category.name"></List>
       </v-tab-item>
     </v-tabs-items>   
   </div>
 </template>
 
 <script>
-import qs from 'qs';
 import { mapState } from 'vuex';
 import List from '@/components/list';
-import { getCategory, getProductsList } from '@/service/api';
+import { getCategory } from '@/service/api';
 
 export default {
   data () {
@@ -105,23 +104,24 @@ export default {
       offset: 0,
       limit: 10,
       category: '',
-      categories: [],
+      categories: [
+        {
+          name: '推荐'
+        }
+      ],
       lists: [],
     };
   },
-  async created () {
+  created () {
     try {
-      await this.getCategories();
-      await this.getProducts(this.categories[0].name);
+      this.getCategories();
     } catch (error) {
       throw Error(err);
-    }
-    
+    }  
   },
   components: {
     List
   },
-
   methods: {
     async getCategories () {
       try {
@@ -136,14 +136,6 @@ export default {
         }
       } catch (error) {
         throw Error(error);
-      }
-    },
-    async getProducts (name) {
-      try {
-        const res = await getProductsList(qs.stringify({ category: name, offset: this.offset, limit: this.limit }));
-        this.lists = res.data.products;
-      } catch (error) {
-        throw Error('获取列表错误');
       }
     },
     logOut () {

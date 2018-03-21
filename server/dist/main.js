@@ -91,6 +91,12 @@ module.exports = require("babel-runtime/helpers/asyncToGenerator");
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
+
+/***/ }),
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -102,25 +108,25 @@ module.exports = require("babel-runtime/helpers/asyncToGenerator");
 });
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 module.exports = require("bcryptjs");
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = require("jsonwebtoken");
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 module.exports = require("time-formater");
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -133,35 +139,6 @@ var randId = function randId() {
   var method = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'base64';
   return __WEBPACK_IMPORTED_MODULE_0_crypto___default.a.randomBytes(64).toString(method);
 };
-
-/***/ }),
-/* 9 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-
-
-var userSchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema({
-  id: Number,
-  username: {
-    type: String,
-    unique: true,
-    require: true,
-    minlength: 3
-  },
-  password: {
-    type: String,
-    require: true,
-    minlength: 6
-  },
-  createAt: String
-});
-
-var User = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('User', userSchema);
-
-/* harmony default export */ __webpack_exports__["a"] = (User);
 
 /***/ }),
 /* 10 */
@@ -262,20 +239,23 @@ var getId = function () {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
+/* WEBPACK VAR INJECTION */(function(__dirname) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_cookie_parser__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_cookie_parser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_cookie_parser__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_body_parser__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_body_parser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_body_parser__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_connect_history_api_fallback__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_connect_history_api_fallback___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_connect_history_api_fallback__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_mongoose__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_chalk__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_chalk___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_chalk__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__config_default__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__api_index__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_path__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_path___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_path__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_body_parser__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_body_parser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_body_parser__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_connect_history_api_fallback__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_connect_history_api_fallback___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_connect_history_api_fallback__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_mongoose__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_mongoose__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_chalk__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_chalk___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_chalk__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__config_default__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__api_index__ = __webpack_require__(16);
+
 
 
 
@@ -286,21 +266,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 // connect mongodb
-__WEBPACK_IMPORTED_MODULE_4_mongoose___default.a.connect(__WEBPACK_IMPORTED_MODULE_6__config_default__["a" /* default */].mongodbUrl);
-__WEBPACK_IMPORTED_MODULE_4_mongoose___default.a.Promise = global.Promise;
-var db = __WEBPACK_IMPORTED_MODULE_4_mongoose___default.a.connection;
+__WEBPACK_IMPORTED_MODULE_5_mongoose___default.a.connect(__WEBPACK_IMPORTED_MODULE_7__config_default__["a" /* default */].mongodbUrl);
+__WEBPACK_IMPORTED_MODULE_5_mongoose___default.a.Promise = global.Promise;
+var db = __WEBPACK_IMPORTED_MODULE_5_mongoose___default.a.connection;
 db.once('open', function () {
-  console.log(__WEBPACK_IMPORTED_MODULE_5_chalk___default.a.green('数据库连接成功!'));
+  console.log(__WEBPACK_IMPORTED_MODULE_6_chalk___default.a.green('数据库连接成功!'));
 });
 
 db.on('error', function (err) {
-  console.log(__WEBPACK_IMPORTED_MODULE_5_chalk___default.a.red('数据连接出错: ' + err));
-  __WEBPACK_IMPORTED_MODULE_4_mongoose___default.a.disconnect();
+  console.log(__WEBPACK_IMPORTED_MODULE_6_chalk___default.a.red('数据连接出错: ' + err));
+  __WEBPACK_IMPORTED_MODULE_5_mongoose___default.a.disconnect();
 });
 
 db.on('close', function () {
-  console.log(__WEBPACK_IMPORTED_MODULE_5_chalk___default.a.red('数据库断开, 重新连接数据库'));
-  __WEBPACK_IMPORTED_MODULE_4_mongoose___default.a.connect(__WEBPACK_IMPORTED_MODULE_6__config_default__["a" /* default */].mongodbUrl, { server: { auto_reconnect: true } });
+  console.log(__WEBPACK_IMPORTED_MODULE_6_chalk___default.a.red('数据库断开, 重新连接数据库'));
+  __WEBPACK_IMPORTED_MODULE_5_mongoose___default.a.connect(__WEBPACK_IMPORTED_MODULE_7__config_default__["a" /* default */].mongodbUrl, { server: { auto_reconnect: true } });
 });
 
 var app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
@@ -318,16 +298,18 @@ app.all('*', function (req, res, next) {
   };
 });
 
-app.use(Object(__WEBPACK_IMPORTED_MODULE_2_body_parser__["json"])());
-app.use(Object(__WEBPACK_IMPORTED_MODULE_2_body_parser__["urlencoded"])({ extended: false, limit: '50mb' }));
+app.use('/static', __WEBPACK_IMPORTED_MODULE_0_express___default.a.static(__WEBPACK_IMPORTED_MODULE_2_path___default.a.join(__dirname, '/public')));
+app.use(Object(__WEBPACK_IMPORTED_MODULE_3_body_parser__["json"])());
+app.use(Object(__WEBPACK_IMPORTED_MODULE_3_body_parser__["urlencoded"])({ extended: false, limit: '50mb' }));
 app.use(__WEBPACK_IMPORTED_MODULE_1_cookie_parser___default()());
 
 // Import API Routes
-app.use('/api', __WEBPACK_IMPORTED_MODULE_7__api_index__["a" /* default */]);
-app.use(__WEBPACK_IMPORTED_MODULE_3_connect_history_api_fallback___default.a);
-app.listen(__WEBPACK_IMPORTED_MODULE_6__config_default__["a" /* default */].port, function () {
-  console.log('Server is listening on port ' + __WEBPACK_IMPORTED_MODULE_6__config_default__["a" /* default */].port);
+app.use('/api', __WEBPACK_IMPORTED_MODULE_8__api_index__["a" /* default */]);
+app.use(__WEBPACK_IMPORTED_MODULE_4_connect_history_api_fallback___default.a);
+app.listen(__WEBPACK_IMPORTED_MODULE_7__config_default__["a" /* default */].port, function () {
+  console.log('Server is listening on port ' + __WEBPACK_IMPORTED_MODULE_7__config_default__["a" /* default */].port);
 });
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, "server"))
 
 /***/ }),
 /* 12 */
@@ -361,9 +343,9 @@ module.exports = require("chalk");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users_routes__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__products_routes__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__admin_routes__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__category_routes__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__products_routes__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__admin_routes__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__category_routes__ = __webpack_require__(30);
 
 
 
@@ -414,16 +396,16 @@ router.get('/lists', __WEBPACK_IMPORTED_MODULE_1__controllers__["b" /* getUserLi
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_bcryptjs__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_bcryptjs__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_bcryptjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_bcryptjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jsonwebtoken__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jsonwebtoken__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jsonwebtoken___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jsonwebtoken__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_time_formater__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_index__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_index__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_ids__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__config_default__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__config_default__ = __webpack_require__(5);
 
 
 
@@ -703,9 +685,38 @@ module.exports = require("crypto");
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
+
+
+var userSchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema({
+  id: Number,
+  username: {
+    type: String,
+    unique: true,
+    require: true,
+    minlength: 3
+  },
+  password: {
+    type: String,
+    require: true,
+    minlength: 6
+  },
+  createAt: String
+});
+
+var User = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('User', userSchema);
+
+/* harmony default export */ __webpack_exports__["a"] = (User);
+
+/***/ }),
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(22);
 
 
 
@@ -719,23 +730,23 @@ router.post('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["c" /* products */].
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return products; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getProductsAllCounts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getProductsList; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_promise__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_formidable__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_formidable__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_formidable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_formidable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_path__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_path__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_path___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_path__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_fs__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_fs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_fs__);
@@ -1100,13 +1111,13 @@ var recommends = [{
 }];
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/core-js/promise");
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1135,16 +1146,10 @@ var Products = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Products'
 /* harmony default export */ __webpack_exports__["a"] = (Products);
 
 /***/ }),
-/* 24 */
-/***/ (function(module, exports) {
-
-module.exports = require("formidable");
-
-/***/ }),
 /* 25 */
 /***/ (function(module, exports) {
 
-module.exports = require("path");
+module.exports = require("formidable");
 
 /***/ }),
 /* 26 */
@@ -1153,200 +1158,13 @@ module.exports = require("path");
 module.exports = require("fs");
 
 /***/ }),
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(32);
-
-
-
-var router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
-
-router.get('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* category */].get);
-router.post('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* category */].post);
-
-/* harmony default export */ __webpack_exports__["a"] = (router);
-
-/***/ }),
-/* 32 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return category; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models__ = __webpack_require__(33);
-
-
-
-
-var category = {
-  get: function get(req, res) {
-    var _this = this;
-
-    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-      var categories;
-      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].find({}, function (err, data) {
-                if (!err) {
-                  if (data && data.length < 1) {
-                    for (var i = 0; i < INITCATEGORY.length; i++) {
-                      __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].create(INITCATEGORY[i]);
-                    }
-                  }
-                }
-              });
-
-            case 3:
-              categories = _context.sent;
-
-              res.status(200).json({
-                status: 200,
-                categories: categories
-              });
-              _context.next = 10;
-              break;
-
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context['catch'](0);
-
-              res.status(1).json({
-                message: '获取种类失败'
-              });
-
-            case 10:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, _this, [[0, 7]]);
-    }))();
-  },
-  post: function post(req, res) {
-    var _this2 = this;
-
-    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-      var name, tag, isExist, _category;
-
-      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.prev = 0;
-              name = req.name, tag = req.tag;
-              _context2.next = 4;
-              return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].findOne({ name: name });
-
-            case 4:
-              isExist = _context2.sent;
-
-              if (isExist) {
-                _context2.next = 12;
-                break;
-              }
-
-              _category = new __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */]({ name: name, tag: tag });
-              _context2.next = 9;
-              return _category.save();
-
-            case 9:
-              res.status(200).json({
-                message: '添加种类成功'
-              });
-              _context2.next = 13;
-              break;
-
-            case 12:
-              res.status(1).json({
-                message: '种类名已存在'
-              });
-
-            case 13:
-              _context2.next = 18;
-              break;
-
-            case 15:
-              _context2.prev = 15;
-              _context2.t0 = _context2['catch'](0);
-
-              res.status(1).json({
-                message: '添加种类失败'
-              });
-
-            case 18:
-            case 'end':
-              return _context2.stop();
-          }
-        }
-      }, _callee2, _this2, [[0, 15]]);
-    }))();
-  }
-};
-
-var INITCATEGORY = [{
-  name: '服装',
-  tag: 'clothes'
-}, {
-  name: '鞋靴',
-  tag: 'shoes'
-}, {
-  name: '家电',
-  tag: 'appliances'
-}, {
-  name: '运动',
-  tag: 'sports'
-}, {
-  name: '美食',
-  tag: 'foods'
-}, {
-  name: '家具',
-  tag: 'furnitures'
-}, {
-  name: '汽车',
-  tag: 'cars'
-}];
-
-/***/ }),
-/* 33 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-
-
-var categorySchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema({
-  name: String,
-  tag: String
-});
-
-var Category = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Category', categorySchema);
-
-/* harmony default export */ __webpack_exports__["a"] = (Category);
-
-/***/ }),
-/* 34 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(28);
 
 
 
@@ -1358,7 +1176,7 @@ router.post('/logout', __WEBPACK_IMPORTED_MODULE_1__controllers__["b" /* logOut 
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
-/* 35 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1369,14 +1187,14 @@ router.post('/logout', __WEBPACK_IMPORTED_MODULE_1__controllers__["b" /* logOut 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_bcryptjs__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_bcryptjs__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_bcryptjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_bcryptjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jsonwebtoken__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jsonwebtoken__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jsonwebtoken___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jsonwebtoken__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_time_formater___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_time_formater__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_index__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_index__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models__ = __webpack_require__(29);
 
 
 
@@ -1540,7 +1358,7 @@ var logOut = {
 };
 
 /***/ }),
-/* 36 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1561,6 +1379,189 @@ var adminSchema = new Schema({
 var Admin = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Admin', adminSchema);
 
 /* harmony default export */ __webpack_exports__["a"] = (Admin);
+
+/***/ }),
+/* 30 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(31);
+
+
+
+var router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
+
+router.get('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* category */].get);
+router.post('/', __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* category */].post);
+
+/* harmony default export */ __webpack_exports__["a"] = (router);
+
+/***/ }),
+/* 31 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return category; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models__ = __webpack_require__(32);
+
+
+
+
+var category = {
+  get: function get(req, res) {
+    var _this = this;
+
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+      var categories;
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].find({}, function (err, data) {
+                if (!err) {
+                  if (data && data.length < 1) {
+                    for (var i = 0; i < INITCATEGORY.length; i++) {
+                      __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].create(INITCATEGORY[i]);
+                    }
+                  }
+                }
+              });
+
+            case 3:
+              categories = _context.sent;
+
+              res.status(200).json({
+                status: 200,
+                categories: categories
+              });
+              _context.next = 10;
+              break;
+
+            case 7:
+              _context.prev = 7;
+              _context.t0 = _context['catch'](0);
+
+              res.status(1).json({
+                message: '获取种类失败'
+              });
+
+            case 10:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, _this, [[0, 7]]);
+    }))();
+  },
+  post: function post(req, res) {
+    var _this2 = this;
+
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+      var name, tag, isExist, _category;
+
+      return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              name = req.name, tag = req.tag;
+              _context2.next = 4;
+              return __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */].findOne({ name: name });
+
+            case 4:
+              isExist = _context2.sent;
+
+              if (isExist) {
+                _context2.next = 12;
+                break;
+              }
+
+              _category = new __WEBPACK_IMPORTED_MODULE_2__models__["a" /* default */]({ name: name, tag: tag });
+              _context2.next = 9;
+              return _category.save();
+
+            case 9:
+              res.status(200).json({
+                message: '添加种类成功'
+              });
+              _context2.next = 13;
+              break;
+
+            case 12:
+              res.status(1).json({
+                message: '种类名已存在'
+              });
+
+            case 13:
+              _context2.next = 18;
+              break;
+
+            case 15:
+              _context2.prev = 15;
+              _context2.t0 = _context2['catch'](0);
+
+              res.status(1).json({
+                message: '添加种类失败'
+              });
+
+            case 18:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, _this2, [[0, 15]]);
+    }))();
+  }
+};
+
+var INITCATEGORY = [{
+  name: '服装',
+  tag: 'clothes'
+}, {
+  name: '鞋靴',
+  tag: 'shoes'
+}, {
+  name: '家电',
+  tag: 'appliances'
+}, {
+  name: '运动',
+  tag: 'sports'
+}, {
+  name: '美食',
+  tag: 'foods'
+}, {
+  name: '家具',
+  tag: 'furnitures'
+}, {
+  name: '汽车',
+  tag: 'cars'
+}];
+
+/***/ }),
+/* 32 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
+
+
+var categorySchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema({
+  name: String,
+  tag: String
+});
+
+var Category = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Category', categorySchema);
+
+/* harmony default export */ __webpack_exports__["a"] = (Category);
 
 /***/ })
 /******/ ]);

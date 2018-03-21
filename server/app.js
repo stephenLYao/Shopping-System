@@ -1,5 +1,6 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import path from 'path';
 import { urlencoded, json } from 'body-parser';
 import history from 'connect-history-api-fallback';
 import mongoose from 'mongoose';
@@ -40,6 +41,7 @@ app.all('*', (req, res, next) => {
   };
 });
 
+app.use('/static', express.static(path.join(__dirname, '/public')));
 app.use(json());
 app.use(urlencoded({extended: false, limit: '50mb'}));
 app.use(cookieParser());
