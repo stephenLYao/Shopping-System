@@ -6,6 +6,8 @@ import SignUp from '@/pages/SignUp';
 import Carts from '@/pages/Carts';
 import Detail from '@/pages/Detail';
 import Order from '@/pages/Order';
+import Profile from '@/pages/Profile';
+import Payment from '@/pages/Payment';
 
 Vue.use(Router);
 
@@ -41,6 +43,16 @@ export default new Router({
       path: '/order',
       name: 'order',
       component: Order
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile
+    },
+    {
+      path: '/payment',
+      name: 'payment',
+      component: Payment
     }
   ]
 });

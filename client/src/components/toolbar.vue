@@ -5,7 +5,7 @@
         <v-card-media
           class="white--text"
           height="200px"
-          src='http://p4zxobaq9.bkt.clouddn.com/bg.jpg'
+          src=''
         >
           <v-container fluid fill-height>
             <v-layout align-center justify-center>
@@ -96,7 +96,7 @@ export default {
         {
           title: '订单',
           icon: 'payment',
-          to: ''
+          to: '/payment'
         }
       ],
       drawer: false,
