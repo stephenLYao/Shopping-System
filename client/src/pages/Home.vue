@@ -15,7 +15,7 @@
                   <img src="../assets/avatar.jpg" >
                 </v-avatar>
                 <v-content class="mt-4 subheading">
-                    {{ $store.state.user.isAuthenticated ? `Hello! ${$store.state.user.username}` : "您好，请登录" }}
+                    {{ $store.state.user.isAuthenticated ? `Hello! ${$store.state.user.username}` : "您好，请先登录" }}
                 </v-content>
               </v-flex>
             </v-layout>
@@ -31,8 +31,11 @@
       </v-list>
       <v-list v-if="$store.state.user.isAuthenticated">
         <v-list-tile v-for="item in items2" :key="item.title" ripple router :to="item.to">
+          <v-list-tile-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-content>{{ item.title }}</v-list-tile-content>
+            {{ item.title }}
           </v-list-tile-content>
         </v-list-tile>
         <v-list-tile @click="logOut">
@@ -50,18 +53,21 @@
         <v-icon>search</v-icon>
       </v-btn>
       <v-btn icon to="/carts">
-        <v-icon>shopping_cart</v-icon>
+        <v-badge right overlap color="red">
+          <span slot="badge">{{ carts_count }}</span>
+          <v-icon>shopping_cart</v-icon>
+        </v-badge>
       </v-btn>
       <v-tabs color="primary" show-arrows slot="extension" grow v-model="tabs">
-        <v-tab v-for="(category, index) in categories" :key="index">
+        <v-tab v-for="(category, index) in categories" :key="index" :to="'#' + category.tag">
           {{ category.name }}
         </v-tab>
         <v-tabs-slider color="white"></v-tabs-slider>
       </v-tabs>
     </v-toolbar>
     <v-tabs-items v-model="tabs" style="margin-top: 110px;">
-      <v-tab-item v-for="(category, index) in categories" :key="index">
-        <List :category="category.name"></List>
+      <v-tab-item v-for="(category, index) in categories" :key="index" :id="category.tag" router>
+        <List :category="category"></List>
       </v-tab-item>
     </v-tabs-items>   
   </div>
@@ -88,14 +94,17 @@ export default {
       items2: [
         {
           title: '个人中心',
+          icon: 'person',
           to: '/profile'
         },
         {
           title: '购物车',
+          icon: 'shopping_cart',
           to: '/carts'
         },
         {
-          title: '账单',
+          title: '订单',
+          icon: 'payment',
           to: ''
         }
       ],
@@ -106,7 +115,8 @@ export default {
       category: '',
       categories: [
         {
-          name: '推荐'
+          name: '推荐',
+          tag: 'recommends'
         }
       ],
       lists: [],
@@ -121,6 +131,11 @@ export default {
   },
   components: {
     List
+  },
+  computed: {
+    ...mapState({
+      carts_count: state => state.carts.carts_count
+    })
   },
   methods: {
     async getCategories () {
