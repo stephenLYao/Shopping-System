@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Toolbar :name="name" :back="back"></Toolbar>
+    <Toolbar :name="name" :back="back" :showCart="true"></Toolbar>
     <v-carousel style="max-height: 330px;">
       <v-carousel-item
         v-for="(item,i) in list.pic_list"
