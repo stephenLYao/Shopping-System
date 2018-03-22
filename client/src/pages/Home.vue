@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Toolbar :showCart="true"></Toolbar>
+    <Toolbar :showCart="true" :showSearch="true"></Toolbar>
     <v-tabs color="primary" dark show-arrows slot="extension" grow v-model="tabs" style="margin-top: 55px;">
       <v-tab v-for="(category, index) in categories" :key="index" :to="'#' + category.tag">
         {{ category.name }}

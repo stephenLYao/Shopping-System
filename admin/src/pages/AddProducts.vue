@@ -267,16 +267,16 @@ export default {
                 type: 'success',
                 message: '添加成功'
               });
-              // this.productsForm = {
-              //   name: '',
-              //   desc: '',
-              //   picList: [],
-              //   specs: [{
-              //     specs: '默认',
-              //     packFee: 0,
-              //     price: 0
-              //   }]
-              // };
+              this.productsForm = {
+                name: '',
+                desc: '',
+                picList: [],
+                specs: [{
+                  specs: '默认',
+                  packFee: 0,
+                  price: 0
+                }]
+              };
             } else {
               this.$message.error('添加失败');
             }

@@ -1,10 +1,10 @@
 <template>
   <div>
-    <Toolbar></Toolbar>
+    <Toolbar :showHome="true"></Toolbar>
     <v-list two-line style="margin: 50px 0;">
       <template v-for="(item, index) in carts_list">
         <v-list-tile :key="index" class="py-4">
-          <v-list-tile-action style="width: 30px;">
+          <v-list-tile-action style="min-width: 30px;">
             <v-checkbox v-model="selected" :value="index + 'c' + item.specs[0].price"></v-checkbox>
           </v-list-tile-action>
           <div class="pic">
@@ -24,11 +24,12 @@
       </template>
     </v-list>
     <v-footer fixed height="50px">
-      <p style="width: 100%;" class="text-xs-right mr-4 mb-0">
+      <v-checkbox class="selectAll" label="全选" v-model="selectAll" hide-details></v-checkbox>
+      <p style="width: 70%;" class="text-xs-right mb-0">
         <span>合计：</span>
         <span class="title red--text">¥ {{ totals }}</span>
-        <v-btn color="primary" dark class="mr-0" style="height: 50px;width: 130px;">
-          支付
+        <v-btn color="primary" dark class="mr-0" style="height: 50px;width: 130px;" :to="{ name: 'order', params: { totals: totals } }">
+          结算
         </v-btn>
       </p>
     </v-footer>
@@ -56,16 +57,28 @@ export default {
       carts_list: state => state.carts.carts_list
     }),
     totals: function () {
-      console.log(this.selected)
       return this.selected.reduce((counts, item) => {
         const price = String(item).split('c')[1];
         return counts += Number(price);
       }, 0);
+    },
+    selectAll: {
+      set: function (value) {
+        const selected = [];
+        if (value) {
+          this.carts_list.forEach((item, index) => {
+            selected.push(index + 'c' + item.specs[0].price);
+          });
+        }
+        this.selected = selected;
+      },
+      get: function () {
+        return this.carts_list ? this.carts_list.length === this.selected.length : false; 
+      }
     }
   },
   methods: {
     handleDelete (index) {
-      console.log(index)
       this.$store.commit('REMOVE_CARTS', { index: index });
     }
   }
@@ -74,12 +87,15 @@ export default {
 
 <style scoped>
 .pic {
-  width: 100px;
+  width: 120px;
   height: 100px;
   margin-right: 20px;
 }
 .pic img {
   width: 100%;
   height: 100%;
+}
+.selectAll {
+  margin-left: 20px;
 }
 </style>

@@ -50,8 +50,11 @@
       </v-btn>
       <v-toolbar-side-icon v-else @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-spacer></v-spacer>
-      <v-btn icon v-show="!back">
+      <v-btn icon v-show="showSearch">
         <v-icon>search</v-icon>
+      </v-btn>
+      <v-btn icon to="/" v-show="showHome">
+        <v-icon>home</v-icon>
       </v-btn>
       <v-btn icon to="/carts" v-show="showCart">
         <v-badge right overlap color="red">
@@ -66,7 +69,7 @@
 <script>
 import { mapState } from 'vuex';
 export default {
-  props: ['back', 'showCart'],
+  props: ['back', 'showCart', 'showHome', 'showSeach'],
   data () {
     return {
       items1: [

@@ -7,7 +7,7 @@
     </v-toolbar>
     <v-content style="background-color: #f6f6f6;">
       <v-container fluid fill-height>
-        <v-layout align-center justify-center>
+        <v-layout justify-center>
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
               <v-toolbar dark color="primary">

@@ -5,6 +5,7 @@ import LogIn from '@/pages/LogIn';
 import SignUp from '@/pages/SignUp';
 import Carts from '@/pages/Carts';
 import Detail from '@/pages/Detail';
+import Order from '@/pages/Order';
 
 Vue.use(Router);
 
@@ -35,6 +36,11 @@ export default new Router({
       path: '/detail/:id',
       name: 'detail',
       component: Detail
+    },
+    {
+      path: '/order',
+      name: 'order',
+      component: Order
     }
   ]
 });

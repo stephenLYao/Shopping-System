@@ -62,6 +62,7 @@ export default {
     async getProducts () {
       try {
         const res = await getProductsList(qs.stringify({ category: this.category.name, offset: this.offset, limit: this.limit }));
+        this.isEnd = res.data.isEnd;
         this.lists = res.data.products;
       } catch (error) {
         throw Error('获取列表错误');
@@ -76,6 +77,7 @@ export default {
         this.offset += this.limit;
         const res = await getProductsList(qs.stringify({ category: this.category.name, offset: this.offset, limit: this.limit }));
         this.loading = false;
+        this.isEnd = res.data.isEnd;
         this.lists = this.lists.concat(res.data.products);
       } catch (error) {
         throw Error('获取列表错误');

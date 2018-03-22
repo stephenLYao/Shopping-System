@@ -1044,7 +1044,7 @@ var getProductsAllCounts = function () {
 
 var getProductsList = function () {
   var _ref4 = __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.mark(function _callee7(req, res) {
-    var _req$query, _req$query$offset, offset, _req$query$limit, limit, products, category;
+    var _req$query, _req$query$offset, offset, _req$query$limit, limit, products, isEnd, category;
 
     return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.wrap(function _callee7$(_context7) {
       while (1) {
@@ -1052,51 +1052,56 @@ var getProductsList = function () {
           case 0:
             _req$query = req.query, _req$query$offset = _req$query.offset, offset = _req$query$offset === undefined ? 0 : _req$query$offset, _req$query$limit = _req$query.limit, limit = _req$query$limit === undefined ? 20 : _req$query$limit;
             products = [];
-            _context7.prev = 2;
+            isEnd = false;
+            _context7.prev = 3;
 
             if (!req.query.category) {
-              _context7.next = 10;
+              _context7.next = 11;
               break;
             }
 
             category = decodeURIComponent(req.query.category);
-            _context7.next = 7;
+            _context7.next = 8;
             return __WEBPACK_IMPORTED_MODULE_3__models__["a" /* default */].find({ category: category }).sort({ id: -1 }).limit(Number(limit)).skip(Number(offset));
 
-          case 7:
+          case 8:
             products = _context7.sent;
-            _context7.next = 13;
+            _context7.next = 14;
             break;
 
-          case 10:
-            _context7.next = 12;
+          case 11:
+            _context7.next = 13;
             return __WEBPACK_IMPORTED_MODULE_3__models__["a" /* default */].find({}).sort({ id: -1 }).limit(Number(limit)).skip(Number(offset));
 
-          case 12:
+          case 13:
             products = _context7.sent;
 
-          case 13:
+          case 14:
+            if (products.length < 1) {
+              isEnd = true;
+            }
             res.status(200).json({
               products: products,
+              isEnd: isEnd,
               message: '获取用户列表成功'
             });
-            _context7.next = 19;
+            _context7.next = 21;
             break;
 
-          case 16:
-            _context7.prev = 16;
-            _context7.t0 = _context7['catch'](2);
+          case 18:
+            _context7.prev = 18;
+            _context7.t0 = _context7['catch'](3);
 
             res.status(1).json({
               message: '获取用户列表失败'
             });
 
-          case 19:
+          case 21:
           case 'end':
             return _context7.stop();
         }
       }
-    }, _callee7, this, [[2, 16]]);
+    }, _callee7, this, [[3, 18]]);
   }));
 
   return function getProductsList(_x7, _x8) {

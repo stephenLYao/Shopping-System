@@ -129,6 +129,7 @@ export async function getProductsAllCounts (req, res) {
 export async function getProductsList (req, res) {
   const { offset = 0, limit = 20 } = req.query;
   let products = [];
+  let isEnd = false;
   try {
     if (req.query.category) {
       const category = decodeURIComponent(req.query.category);
@@ -136,8 +137,12 @@ export async function getProductsList (req, res) {
     } else {
       products = await Products.find({}).sort({id: -1}).limit(Number(limit)).skip(Number(offset));
     }
+    if (products.length < 1) {
+      isEnd = true;
+    }
     res.status(200).json({
       products,
+      isEnd,
       message: '获取用户列表成功'
     });
   } catch (error) {
