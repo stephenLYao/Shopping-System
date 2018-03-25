@@ -1,13 +1,21 @@
 <template>
   <div>
     <Toolbar :showCart="true" :showSearch="true"></Toolbar>
-    <v-tabs color="primary" dark show-arrows slot="extension" grow v-model="tabs" style="margin-top: 55px;">
+    <v-tabs
+      color="primary"
+      dark
+      show-arrows
+      slot="extension"
+      grow
+      v-model="tabs"
+      style="margin-top: 55px;position: fixed;z-index: 2;"
+    >
       <v-tab v-for="(category, index) in categories" :key="index" :to="'#' + category.tag">
         {{ category.name }}
       </v-tab>
       <v-tabs-slider color="white"></v-tabs-slider>
     </v-tabs>
-    <v-tabs-items v-model="tabs">
+    <v-tabs-items v-model="tabs" style="margin-top: 103px;">
       <v-tab-item v-for="(category, index) in categories" :key="index" :id="category.tag" router>
         <List :category="category"></List>
       </v-tab-item>

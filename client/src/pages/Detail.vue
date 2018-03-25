@@ -32,8 +32,15 @@
     </div>
     <v-footer fixed height="45px">
       <v-btn large style="width: 50%;margin: 0;">加入收藏</v-btn>
-      <v-btn large color="primary" style="width: 50%;margin: 0;" @click="addToCarts">添加购物车</v-btn>
+      <v-btn large color="red" dark style="width: 50%;margin: 0;" @click="addToCarts">添加购物车</v-btn>
     </v-footer>
+    <v-snackbar
+      :timeout="timeout"
+      v-model="snackbar"
+    >
+      添加成功
+      <v-btn flat color="pink" @click.native="snackbar = false">Close</v-btn>
+    </v-snackbar>
   </div>
 </template>
 
@@ -47,7 +54,9 @@ export default {
       name: '商品详情',
       back: '/#' + this.$route.params.tag,
       list: this.$route.params.list,
-      price: 0
+      price: 0,
+      snackbar: false,
+      timeout: 3000
     };
   },
   components: {
@@ -56,6 +65,7 @@ export default {
   methods: {
     addToCarts () {
       this.$store.commit('ADD_CARTS', { list: this.list});
+      this.snackbar = true;
     }
   }
 };

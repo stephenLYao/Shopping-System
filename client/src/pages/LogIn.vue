@@ -1,18 +1,16 @@
 <template>
   <v-app>
-    <v-toolbar light >
+    <v-toolbar color="primary" dark>
       <v-btn icon :to="{ name: 'home'}">
-        <v-icon color="primary">arrow_back</v-icon>
+        <v-icon>arrow_back</v-icon>
       </v-btn>
+      <v-toolbar-title>登录</v-toolbar-title>
     </v-toolbar>
     <v-content style="background-color: #f6f6f6;">
-      <v-container fluid fill-height>
+      <v-container fluid fill-height class="px-0 py-0">
         <v-layout justify-center>
           <v-flex xs12 sm8 md4>
-            <v-card class="elevation-12">
-              <v-toolbar dark color="primary">
-                <v-toolbar-title>登录</v-toolbar-title>
-              </v-toolbar>
+            <v-card flat>
               <v-card-text>
                 <form @keyup.enter="submit">
                   <v-text-field
@@ -26,7 +24,7 @@
                     label="password"
                     type="password"
                   ></v-text-field>
-                  <v-btn @click.native="submit" block color="primary">登录</v-btn>
+                  <v-btn @click.native="submit" block color="primary">提交</v-btn>
                 </form>
               </v-card-text>
             </v-card>

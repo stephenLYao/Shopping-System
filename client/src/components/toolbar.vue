@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-navigation-drawer fixed app temporary v-model="drawer">
-      <v-card color="primary" dark>
+      <v-card color="primary" dark flat>
         <v-card-media
           class="white--text"
           height="200px"
@@ -69,7 +69,7 @@
 <script>
 import { mapState } from 'vuex';
 export default {
-  props: ['back', 'showCart', 'showHome', 'showSeach'],
+  props: ['back', 'showCart', 'showHome', 'showSearch'],
   data () {
     return {
       items1: [

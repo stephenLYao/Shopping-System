@@ -5,7 +5,7 @@
       <template v-for="(item, index) in carts_list">
         <v-list-tile :key="index" class="py-4">
           <v-list-tile-action style="min-width: 30px;">
-            <v-checkbox v-model="selected" :value="index + 'c' + item.specs[0].price"></v-checkbox>
+            <v-checkbox v-model="selected" :value="item"></v-checkbox>
           </v-list-tile-action>
           <div class="pic">
             <img :src="imgURL + item.pic_list[0]">
@@ -15,8 +15,8 @@
             <v-list-tile-sub-title class="title" style="margin-top: 10px;"> ¥{{ item.specs[0].price}}</v-list-tile-sub-title>
           </v-list-tile-content>
           <v-list-tile-action>
-            <v-btn icon ripple @click="handleDelete(index)">
-              <v-icon color="red lighten-1">close</v-icon>
+            <v-btn color="red" dark ripple @click="handleDelete(index)" style="min-width: 50px;">
+              删除
             </v-btn>
           </v-list-tile-action>
         </v-list-tile>
@@ -28,11 +28,24 @@
       <p style="width: 70%;" class="text-xs-right mb-0">
         <span>合计：</span>
         <span class="title red--text">¥ {{ totals }}</span>
-        <v-btn color="primary" dark class="mr-0" style="height: 50px;width: 130px;" :to="{ name: 'order', params: { totals: totals } }">
+        <v-btn 
+          color="red"
+          dark
+          class="mr-0" 
+          style="height: 50px;width: 130px;"
+          @click="handleClick"
+        >
           结算
         </v-btn>
       </p>
     </v-footer>
+    <v-snackbar
+      :timeout="timeout"
+      v-model="snackbar"
+    >
+      未选择商品
+      <v-btn flat color="pink" @click.native="snackbar = false">Close</v-btn>
+    </v-snackbar>
   </div>
 </template>
 
@@ -46,7 +59,9 @@ export default {
   data () {
     return {
       imgURL,
-      selected: []
+      selected: [],
+      snackbar: false,
+      timeout: 3000
     };
   },
   components: {
@@ -58,16 +73,15 @@ export default {
     }),
     totals: function () {
       return this.selected.reduce((counts, item) => {
-        const price = String(item).split('c')[1];
-        return counts += Number(price);
+        return counts += Number(item.specs[0].price);
       }, 0);
     },
     selectAll: {
       set: function (value) {
         const selected = [];
         if (value) {
-          this.carts_list.forEach((item, index) => {
-            selected.push(index + 'c' + item.specs[0].price);
+          this.carts_list.forEach((item) => {
+            selected.push(item);
           });
         }
         this.selected = selected;
@@ -80,6 +94,19 @@ export default {
   methods: {
     handleDelete (index) {
       this.$store.commit('REMOVE_CARTS', { index: index });
+    },
+    handleClick () {
+      if (this.selected.length > 0) {
+        this.$router.push({
+          name: 'order',
+          params: {
+            selected: this.selected,
+            totals: this.totals
+          }
+        });
+      } else {
+        this.snackbar = true;
+      }
     }
   }
 };
@@ -90,6 +117,8 @@ export default {
   width: 120px;
   height: 100px;
   margin-right: 20px;
+  min-width: 80px;
+  max-width: 80px;
 }
 .pic img {
   width: 100%;
